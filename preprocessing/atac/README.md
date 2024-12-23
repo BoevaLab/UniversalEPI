@@ -1,6 +1,6 @@
 ## ATAC-seq Data Processing
 
-### Step 0 (optional): Generating signal p-value bigwig and peak files
+### Step 0 (optional): Generating signal p-value bigwig and peak files from BAM
 This step requires the following additional tools/packages:
 - bedClip (Download from [UCSC's utilities](https://hgdownload.soe.ucsc.edu/downloads.html#utilities_downloads))
 - bedGraphToBigWig (Download from [UCSC's utilities](https://hgdownload.soe.ucsc.edu/downloads.html#utilities_downloads))
