@@ -6,8 +6,13 @@ __pycache__/
 # C extensions
 *.so
 
+# Blacklist files
+blacklist/basenji_blacklist.bed
+blacklist/basenji_unmappable.bed
+
 # Distribution / packaging
 .Python
+.DS_Store
 build/
 develop-eggs/
 dist/
