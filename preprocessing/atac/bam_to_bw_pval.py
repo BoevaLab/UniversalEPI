@@ -5,12 +5,13 @@ import subprocess
 import time
 
 # BEDCLIP_PATH = '~/Downloads/bedClip'
+# BEDGRAPH2BW_PATH = '~/Downloads/bedGraphToBigWig'
 
 def main():
     args = parse()
     assert args.bam_file.endswith('.bam')
 
-    macs2_signal_track(bam_file=args.bam_file, prefix=args.out_prefix, chr_sz=args.chrom_sizes, bedclip_path=args.bedclip_path)
+    macs2_signal_track(bam_file=args.bam_file, prefix=args.out_prefix, chr_sz=args.chrom_sizes, bedclip_path=args.bedclip_path, bedgraph2bw_path=args.bedgraph2bw_path)
 
 
 def parse() -> argparse.Namespace:
@@ -19,12 +20,13 @@ def parse() -> argparse.Namespace:
     parser.add_argument('-f', '--bam_file', type=str, required=True)
     parser.add_argument('-o', '--out_prefix', type=str, required=True)
     parser.add_argument('--bedclip_path', type=str, required=True)
+    parser.add_argument('--bedgraph2bw_path', type=str, required=True)
     parser.add_argument('--chrom_sizes', type=str, required=True)
 
     return parser.parse_args()
 
 
-def macs2_signal_track(bam_file, prefix, chr_sz, bedclip_path, gen_sz='hs', pval_thresh=0.01, smooth_win=150):
+def macs2_signal_track(bam_file, prefix, chr_sz, bedclip_path, bedgraph2bw_path ,gen_sz='hs', pval_thresh=0.01, smooth_win=150):
     # gen_sz - Genome size (sum of entries in 2nd column of chr. sizes file, or hs for human, ms for mouse)
     pval_bigwig = f'{prefix}.pval.signal.bigwig'
 
@@ -67,7 +69,7 @@ def macs2_signal_track(bam_file, prefix, chr_sz, bedclip_path, gen_sz='hs', pval
     rm_f(pval_bedgraph)
     
     
-    run_shell_cmd(f'bedGraphToBigWig {pval_bedgraph_srt} {chr_sz} {pval_bigwig}')
+    run_shell_cmd(f'{bedgraph2bw_path} {pval_bedgraph_srt} {chr_sz} {pval_bigwig}')
     rm_f(pval_bedgraph_srt)
 
     #remove temporary files

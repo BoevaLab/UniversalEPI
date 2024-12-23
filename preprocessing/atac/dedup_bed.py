@@ -34,7 +34,7 @@ def deduplicate_bed(file_path, chroms, save_path):
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Deduplicate ATAC-seq peaks")
-    parser.add_argument('-f',"--file_path", type=str, help="Path to the bed file containing ATAC-seq peaks")
+    parser.add_argument('-f',"--file_path", type=str, help="Path to the bed file containing ATAC-seq peaks", required=True)
     parser.add_argument('-c', "--chroms", default=[*range(1,23)], type=int, nargs="+", help="Chromosomes to consider")
     return parser.parse_args()
 

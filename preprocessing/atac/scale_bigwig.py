@@ -4,9 +4,9 @@ from tqdm import tqdm
 import numpy as np
 
 parser = argparse.ArgumentParser(description="scale all values in given bigwig by constant factor")
-parser.add_argument("-i", "--input_bigwig_file", metavar="input", type=str, help="full path to the input BigWig file")
-parser.add_argument("-o", "--output_bigwig_file", metavar="output", type=str, help="full path to the output BigWig file")
-parser.add_argument("-s", "--scale_factor", metavar="scale", type=float, help="the scale factor to multiply the values by")
+parser.add_argument("-i", "--input_bigwig_file", metavar="input", type=str, help="full path to the input BigWig file", required=True)
+parser.add_argument("-o", "--output_bigwig_file", metavar="output", type=str, help="full path to the output BigWig file", required=True)
+parser.add_argument("-s", "--scale_factor", metavar="scale", type=float, help="the scale factor to multiply the values by", required=True)
 parser.add_argument("-p", "--precision", type=int, default=3, help="number of decimal places to round to")
 args = parser.parse_args()
 
