@@ -67,10 +67,13 @@ a. Train Stage1. It uses training cell lines defined in [`./Stage1/configs/datam
   ```
   python ./Stage1/train.py
   ```
+
 b. Test Stage1. It uses test cell lines defined in [`./Stage1/configs/datamodule/validation/cross_cell.yaml`](https://github.com/BoevaLab/UniversalEPI/blob/main/Stage1/configs/datamodule/validation/cross-cell.yaml).
   ```
   python ./Stage1/test.py
   ```
+  [Plotting scripts](https://github.com/BoevaLab/UniversalEPI/tree/main/plotting_scripts) can then be used to generate evaluation plots.
+  
 c. Train Stage2
   - Create input dataset for training and validation.
     ```
@@ -90,6 +93,7 @@ c. Train Stage2
     ```
     python ./Stage2/train.py --config_dir ./Stage2/configs/configs.yaml
     ```
+
 d. Test Stage2
   - Create dataset for testing
     ```
@@ -107,4 +111,4 @@ d. Test Stage2
      - predictions (log Hi-C between peaks 1 and 2)
      - variance (aleatoric uncertainty associated with the prediction)
      - targets (log Hi-C)
-  - [Plotting scripts]() can then be used to generate evaluation plots 
+  - [Plotting scripts](https://github.com/BoevaLab/UniversalEPI/tree/main/plotting_scripts) can then be used to generate evaluation plots 
