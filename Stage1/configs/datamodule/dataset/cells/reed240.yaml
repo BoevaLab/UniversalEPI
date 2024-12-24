@@ -1,0 +1,32 @@
+defaults:
+ - /datamodule/dataset/cells/cell-template@Reed240
+ - /datamodule/dataset/species/human@Reed240.genome
+
+Reed240:
+
+  bin_target: 'atacpeak'
+
+  data_types: 
+
+    atacsignal:
+      # Lab: 
+      # GEO Accession: 
+      # UCSC Accession: 
+      source: 
+        url: file://${data_dir}/raw/human/Reed240/atacsignal/0240_edger.bw
+        md5: null
+        
+
+    atacpeak:
+      # Lab: 
+      # GEO Accession: 
+      # UCSC Accession: 
+      source: 
+        url: file://${data_dir}/raw/human/Reed240/atacpeak/0240_dedup.bed
+        md5: null
+
+    
+    # Cell line is only used for prediction. Skip TF data
+    ctcfpeak: null
+    sp1peak: null
+    yy1peak: null

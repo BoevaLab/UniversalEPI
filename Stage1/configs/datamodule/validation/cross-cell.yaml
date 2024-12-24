@@ -1,0 +1,12 @@
+cell_line: 
+  fit: [Gm12878, K562]
+  validate: [Gm12878, K562]
+  test: [A549]
+  predict: [Hepg2]   # [Reed0, Reed1440, Gm12878, K562, Imr90, Hepg2]
+
+
+chromosome:
+  fit: ["chr1", "chr3", "chr4", "chr7", "chr8", "chr9", "chr10", "chr11", "chr14", "chr15", "chr16", "chr17", "chr18", "chr20", "chr22"]
+  validate: ["chr5", "chr21", "chr12", "chr13"]
+  test: ["chr19", "chr2", "chr6"]
+  predict: null # Include all chromosomes

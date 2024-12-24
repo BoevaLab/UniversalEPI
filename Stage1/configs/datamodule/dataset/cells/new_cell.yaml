@@ -1,0 +1,34 @@
+# Replace <cell> with the name of your cell line/condition
+# See other cell lines/conditions in this directory for examples 
+defaults:
+ - /datamodule/dataset/cells/cell-template@<cell>
+ - /datamodule/dataset/species/human@<cell>.genome
+
+<cell>:
+
+  bin_target: 'atacpeak'
+
+  data_types: 
+
+    atacsignal:
+      # Lab: 
+      # GEO Accession: 
+      # UCSC Accession: 
+      source: 
+        url: file://${data_dir}/raw/human/<cell>/atacsignal/<atac>.bigwig # Replace <atac> with the name of your bigwig file
+        md5: null
+        
+
+    atacpeak:
+      # Lab: 
+      # GEO Accession: 
+      # UCSC Accession: 
+      source: 
+        url: file://${data_dir}/raw/human/<cell>/atacpeak/<atac>.bed # Replace <atac> with the name of your peak file
+        md5: null
+
+    
+    # Cell line is only used for prediction. Skip TF data
+    ctcfpeak: null
+    sp1peak: null
+    yy1peak: null

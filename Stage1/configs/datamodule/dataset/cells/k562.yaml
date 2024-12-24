@@ -1,0 +1,53 @@
+defaults:
+ - /datamodule/dataset/cells/cell-template@K562
+ - /datamodule/dataset/species/human@K562.genome
+
+K562:
+
+  bin_target: 'atacpeak'
+
+  data_types: 
+
+    atacsignal:
+      # Lab: 
+      # GEO Accession: 
+      # UCSC Accession: 
+      source: 
+        url: file://${data_dir}/raw/human/K562/atacsignal/K562_p_edger.bw #p-val
+        md5: null
+        
+
+    atacpeak:
+      # Lab: 
+      # GEO Accession: 
+      # UCSC Accession: 
+      source: 
+        url: file://${data_dir}/raw/human/K562/atacpeak/K562_dedup.bed
+        md5: null
+
+        
+    ctcfpeak:
+      # Lab: 
+      # GEO Accession: 
+      # UCSC Accession: 
+      source: 
+        url: https://www.encodeproject.org/files/ENCFF582SNT/@@download/ENCFF582SNT.bed.gz
+        md5: null
+        
+
+    sp1peak:
+      # Lab: 
+      # GEO Accession: 
+      # UCSC Accession: 
+      source: 
+        url: https://www.encodeproject.org/files/ENCFF171NEU/@@download/ENCFF171NEU.bed.gz
+        md5: null
+        
+
+    yy1peak:
+      # Lab: 
+      # GEO Accession: 
+      # UCSC Accession: 
+      source: 
+        url: https://www.encodeproject.org/files/ENCFF398UQZ/@@download/ENCFF398UQZ.bed.gz
+        md5: null

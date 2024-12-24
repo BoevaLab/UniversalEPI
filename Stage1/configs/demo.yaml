@@ -1,0 +1,24 @@
+# @package _global_
+
+# specify here default training configuration
+defaults:
+
+  # Settings in this file
+  - _self_
+
+  # Datamodule + model share a training mode defined in experiments (regression, architecture, targets ...)
+  - datamodule: multicell
+
+  # enable color logging
+  - override hydra/hydra_logging: colorlog
+  - override hydra/job_logging: colorlog
+
+# path to original working directory
+# hydra hijacks working directory by changing it to the new log directory
+# https://hydra.cc/docs/next/tutorials/basic/running_your_app/working_directory
+original_work_dir: ${hydra:runtime.cwd}
+
+# path to folder with data
+data_dir: ${original_work_dir}/data/atac/
+
+print_config: True

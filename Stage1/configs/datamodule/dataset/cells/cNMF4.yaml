@@ -1,0 +1,32 @@
+defaults:
+ - /datamodule/dataset/cells/cell-template@cNMF4
+ - /datamodule/dataset/species/human@cNMF4.genome
+
+cNMF4:
+
+  bin_target: 'atacpeak'
+
+  data_types: 
+
+    atacsignal:
+      # Lab: 
+      # GEO Accession: 
+      # UCSC Accession: 
+      source: 
+        url: file://${data_dir}/raw/human/cNMF4/atacsignal/cNMF4_pval_edger.bw
+        md5: null
+        
+
+    atacpeak:
+      # Lab: 
+      # GEO Accession: 
+      # UCSC Accession: 
+      source: 
+        url: file://${data_dir}/raw/human/cNMF4/atacpeak/MERGED_dedup.bed
+        md5: null
+
+    
+    # Cell line is only used for prediction. Skip TF data
+    ctcfpeak: null
+    sp1peak: null
+    yy1peak: null

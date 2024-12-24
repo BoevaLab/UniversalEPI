@@ -1,0 +1,53 @@
+defaults:
+ - /datamodule/dataset/cells/cell-template@Hepg2
+ - /datamodule/dataset/species/human@Hepg2.genome
+
+Hepg2:
+
+  bin_target: 'atacpeak'
+
+  data_types: 
+
+    atacsignal:
+      # Lab: 
+      # GEO Accession: 
+      # UCSC Accession: 
+      source: 
+        url: file://${data_dir}/raw/human/Hepg2/atacsignal/HEPG2_p_edger.bw #p-val
+        md5: null
+        
+
+    atacpeak:
+      # Lab: 
+      # GEO Accession: 
+      # UCSC Accession: 
+      source: 
+        url: file://${data_dir}/raw/human/Hepg2/atacpeak/HEPG2_dedup.bed
+        md5: null
+
+        
+    ctcfpeak:
+      # Lab: 
+      # GEO Accession: 
+      # UCSC Accession: 
+      source: 
+        url: https://www.encodeproject.org/files/ENCFF543WTP/@@download/ENCFF543WTP.bed.gz
+        md5: null
+        
+
+    sp1peak:
+      # Lab: 
+      # GEO Accession: 
+      # UCSC Accession: 
+      source: 
+        url: https://www.encodeproject.org/files/ENCFF806TIM/@@download/ENCFF806TIM.bed.gz
+        md5: null
+        
+
+    yy1peak:
+      # Lab: 
+      # GEO Accession: 
+      # UCSC Accession: 
+      source: 
+        url: https://www.encodeproject.org/files/ENCFF958OUE/@@download/ENCFF958OUE.bed.gz
+        md5: null

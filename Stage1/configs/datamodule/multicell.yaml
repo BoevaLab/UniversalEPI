@@ -1,0 +1,29 @@
+_target_: src.datamodules.MultiCellModule
+
+defaults:
+  # Load the following cells as datasets (see subfolder cells for individual dataset config)
+  - dataset/cells@datasets: [gm12878, k562, hepg2, imr90, A549, reed0, reed30, reed60, reed90, reed120, reed240, reed360, reed1440, cNMF4, cNMF5]
+
+  # Use cross chromosome validation per default
+  - validation@dataset_split: cross-cell
+
+# Predict the following target TFs:
+selected_targets: [ctcfpeakforward, ctcfpeakreverse, sp1peak, yy1peak]
+
+# Prediction mode (classification / regression)
+mode: regression
+
+# Binning of the features
+binning:
+  width: 1000
+  step: 200 # Setting step to 0 results in local binning
+
+# Batch loading
+batch_size: 1024 #32 128
+num_workers: 8
+pin_memory: False
+
+# Setting this flag to true will force a full pre-processing instead of loading
+# already processed data from disk.
+force_reload: False
+

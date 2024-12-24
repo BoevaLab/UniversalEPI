@@ -226,6 +226,8 @@ def main():
         hic_data_dir = os.path.join(base_dir, "smooth_hic")
     else:
         atac_bed = add_neg_samples(atac_bed_path, chroms)
+        atac_save_path = atac_bed_path.replace(".bed", "_neg.bed")
+        atac_bed.to_csv(atac_save_path, sep='\t', index=False, header=False)
         hic_data_dir = os.path.join(base_dir, "iced_quan_norm")
     
     save_target_data(atac_bed, hic_data_dir, bin_size, len_bins, chroms)

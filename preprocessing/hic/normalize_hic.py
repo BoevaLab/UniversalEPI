@@ -30,7 +30,7 @@ def robust_norm(cell_lines, data_dir, ref_dir=None, chrom=range(1,23), bin_size=
 def parse_args():
     parser = argparse.ArgumentParser(description="Preprocess Hi-C data")
     parser.add_argument("--cell_lines", type=str, nargs="+", help="List of cell lines", required=True)
-    parser.add_argument("--data_dir", default='./data/', type=str, help="Path to the directory containing Hi-C data")
+    parser.add_argument("--data_dir", default='../data/hic', type=str, help="Path to the directory containing Hi-C data")
     parser.add_argument("--chrom", default=[*range(1,23)], type=int, nargs="+", help="Chromosomes to consider")
     parser.add_argument("--bin_size", default=5000, type=int, help="Bin size")
     parser.add_argument("--max_len", default=2_000_000, type=int, help="Number of bins")
@@ -42,7 +42,7 @@ def main():
     args = parse_args()
     cell_lines = args.cell_lines
     data_dir = args.data_dir
-    ref_dir = "./data/"
+    ref_dir = "../data/hic/"
     chroms = args.chrom
     bin_size = args.bin_size
     len_bins = (args.max_len//bin_size)+1

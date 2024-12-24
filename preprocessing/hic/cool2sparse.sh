@@ -5,7 +5,7 @@
 # Optionally applies ICE normalization and processes specific chromosomes
 
 # Usage: ./cool2sparse.sh <input_cool_file> <output_dir> [--ice] [<chromosomes>]
-# Example: ./cool2sprase.sh ./data/cool/GM12878.cool ./data/gm12878 --ice 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 20 21 22
+# Example: ./cool2sprase.sh ../data/hic/GM12878.cool .,/data/hic/gm12878 --ice 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 20 21 22
 
 # Parse arguments
 input_path="$1"

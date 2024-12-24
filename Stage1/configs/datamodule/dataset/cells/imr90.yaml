@@ -1,0 +1,32 @@
+defaults:
+ - /datamodule/dataset/cells/cell-template@Imr90
+ - /datamodule/dataset/species/human@Imr90.genome
+
+Imr90:
+
+  bin_target: 'atacpeak'
+
+  data_types: 
+
+    atacsignal:
+      # Lab: 
+      # GEO Accession: 
+      # UCSC Accession: 
+      source: 
+        url: file://${data_dir}/raw/human/Imr90/atacsignal/IMR90_p_edger.bw
+        md5: null
+        
+
+    atacpeak:
+      # Lab: 
+      # GEO Accession: 
+      # UCSC Accession: 
+      source: 
+        url: file://${data_dir}/raw/human/Imr90/atacpeak/IMR90_dedup.bed
+        md5: null
+
+    
+    # Cell line is only used for prediction. Skip TF data
+    ctcfpeak: null
+    sp1peak: null
+    yy1peak: null

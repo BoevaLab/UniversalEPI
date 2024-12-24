@@ -1,0 +1,13 @@
+defaults:
+  - species-template
+
+  # REFERENCE GENOME
+  
+species: human
+
+source: 
+  url: https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz
+  md5: 1c9dcaddfa41027f17cd8f7a82c7293b
+  #url: http://hgdownload.soe.ucsc.edu/goldenPath/hg19/encodeDCC/referenceSequences/male.hg19.fa.gz
+  #md5: cc70bf386309d75e274a43e53e545183
+

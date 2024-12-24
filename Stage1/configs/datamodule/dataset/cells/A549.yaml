@@ -1,0 +1,54 @@
+defaults:
+ - /datamodule/dataset/cells/cell-template@A549
+ - /datamodule/dataset/species/human@A549.genome
+
+A549:
+
+  bin_target: 'atacpeak'
+
+  data_types: 
+
+    atacsignal:
+      # Lab: 
+      # GEO Accession: 
+      # UCSC Accession: 
+      source: 
+        url: file://${data_dir}/raw/human/A549/atacsignal/A549_p_edger.bw # p-val
+        md5: null
+        
+
+    atacpeak:
+      # Lab: 
+      # GEO Accession: 
+      # UCSC Accession: 
+      source: 
+        url: file://${data_dir}/raw/human/A549/atacpeak/A549_dedup.bed
+        md5: null
+
+        
+    ctcfpeak:
+      # Lab: 
+      # GEO Accession: 
+      # UCSC Accession: 
+      source: 
+        url: https://www.encodeproject.org/files/ENCFF875TRW/@@download/ENCFF875TRW.bed.gz
+        md5: null
+        
+
+    sp1peak:
+      # Lab: 
+      # GEO Accession: 
+      # UCSC Accession: 
+      source: 
+        url: https://www.encodeproject.org/files/ENCFF110OZO/@@download/ENCFF110OZO.bed.gz
+        md5: null
+        
+
+    yy1peak:
+      # Lab: 
+      # GEO Accession: 
+      # UCSC Accession: 
+      source: 
+        url: https://www.encodeproject.org/files/ENCFF567CJH/@@download/ENCFF567CJH.bed.gz
+        md5: null
+        

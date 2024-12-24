@@ -1,0 +1,9 @@
+source: 
+  url: ???
+  #md5: ???
+
+# Where to store the data on disk
+destination:
+  raw: ${data_dir}/raw
+  processed: ${data_dir}/processed
+

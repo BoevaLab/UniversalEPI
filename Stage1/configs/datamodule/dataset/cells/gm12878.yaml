@@ -1,0 +1,53 @@
+defaults:
+ - /datamodule/dataset/cells/cell-template@Gm12878
+ - /datamodule/dataset/species/human@Gm12878.genome
+
+Gm12878:
+
+  bin_target: 'atacpeak'
+
+  data_types: 
+
+    atacsignal:
+      # Lab: 
+      # GEO Accession: 
+      # UCSC Accession: 
+      source: 
+        url: file://${data_dir}/raw/human/Gm12878/atacsignal/GM12878_p_edger.bw #p-val
+        md5: null
+        
+
+    atacpeak:
+      # Lab: 
+      # GEO Accession: 
+      # UCSC Accession: 
+      source: 
+        url: file://${data_dir}/raw/human/Gm12878/atacpeak/GM12878_dedup.bed #replace path
+        md5: null
+
+        
+    ctcfpeak:
+      # Lab: 
+      # GEO Accession: 
+      # UCSC Accession: 
+      source: 
+        url: https://www.encodeproject.org/files/ENCFF796WRU/@@download/ENCFF796WRU.bed.gz
+        md5: null
+        
+
+    sp1peak:
+      # Lab: 
+      # GEO Accession: 
+      # UCSC Accession: 
+      source: 
+        url: https://www.encodeproject.org/files/ENCFF038AVV/@@download/ENCFF038AVV.bed.gz
+        md5: null
+        
+
+    yy1peak:
+      # Lab: 
+      # GEO Accession: 
+      # UCSC Accession: 
+      source: 
+        url: https://www.encodeproject.org/files/ENCFF446ZSX/@@download/ENCFF446ZSX.bed.gz
+        md5: null

@@ -1,0 +1,53 @@
+_target_ : src.datasets.CellDataset
+
+defaults:
+ - /datamodule/dataset/resource@data_types.atacsignal
+ - /datamodule/dataset/resource@data_types.atacpeak
+ - /datamodule/dataset/resource@data_types.ctcfpeak
+ - /datamodule/dataset/resource@data_types.sp1peak
+ - /datamodule/dataset/resource@data_types.yy1peak
+
+# Reference to the genome 
+# Use parameter mapping by adding the following parameter mapping to your dataset:
+#
+#   defaults:
+#     - /datamodule/dataset/species/human@Gm12878.genome
+genome: ???
+
+# When applying local binning to this dataset, use the following datatype 
+bin_target: ???
+
+data_types: 
+
+  # ATAC OPEN CHROMATIN 
+  # ------------------------------------------------------------------------------------
+ 
+  atacsignal:
+    # Using DNase parser here
+    _target_ : src.datasets.DnaseParser
+
+  atacpeak:
+    _target_ : src.datasets.NarrowPeakParser
+ 
+
+  # CHIP-SEQ PEAKS
+  # ------------------------------------------------------------------------------------
+  # There is no lab that covers all cell types + transcription factors, so data from two
+  # labs is used:
+  #
+  # Lab:    University of Washington
+  # Source: CTCF Binding Sites by ChIP-seq from ENCODE/University of Washington
+  # Link:   http://genome.ucsc.edu/cgi-bin/hgFileUi?db=hg19&g=wgEncodeUwTfbs
+  #
+  # Lab:    Hudson Alpha Institute for Biotechnology
+  # Source: Transcription Factor ChIP-seq Uniform Peaks from ENCODE/Analysis
+  # Link:   http://genome.ucsc.edu/cgi-bin/hgFileUi?db=hg19&g=wgEncodeAwgTfbsUniform
+
+  ctcfpeak:
+    _target_ : src.datasets.CTCFParser
+
+  sp1peak:
+    _target_ : src.datasets.NarrowPeakParser
+
+  yy1peak:
+    _target_ : src.datasets.NarrowPeakParser
