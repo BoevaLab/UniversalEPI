@@ -10,7 +10,7 @@ UniversalEPI: Harnessing Attention Mechanisms to Decode Chromatin Interactions i
 a. Input data processing
   - The details for processing ATAC-seq data from your raw input (BAM) or processed files (signal p-values bigwig and peaks bed) can be found in [`preprocessing/atac`](https://github.com/BoevaLab/UniversalEPI/tree/main/preprocessing/atac). This includes normalizing the bigwig and deduplication of ATAC-seq peaks.
 
-b. Target data processing (optional)
+b. Target data processing
   - [`preprocessing/hic`](https://github.com/BoevaLab/UniversalEPI/tree/main/preprocessing/hic) contains the details for processing Hi-C data from your raw input (.hic or .cool) or processed files (pairwise interaction files). This includes Hi-C normalization.
   - Combine ATAC-seq and Hi-C to extract targets corresponding to ATAC peaks for each training cell line
     ```
@@ -27,49 +27,49 @@ b. Target data processing (optional)
 
 ## Extract Genomic Features
 
-1. Create a new config file for your cell line or condition in [`./Stage1/`](). See [`./Stage1/`]() for more details on how this can be done.
+1. Create a new config file for your cell line or condition in [`./Stage1/`](https://github.com/BoevaLab/UniversalEPI/tree/main/Stage1). See [`./Stage1/`](https://github.com/BoevaLab/UniversalEPI/tree/main/Stage1) for more details on how this can be done.
 2. Store the genomic inputs
-  ```
-  python ./Stage1/store_inputs.py --cell_line imr90
-  ```
-  This will store parquet files containing DNA-sequence, ATAC-seq, and mappability data at `./data/stage1_outputs/predict_imr90/`. By default, all chromosomes will be used. To use a subset of chromosomes, mention the chromosomes under "chromosome: predict:" in [`./Stage1/configs/datamodule/validation/cross_cell.yaml`]().
+   ```
+   python ./Stage1/store_inputs.py --cell_line imr90
+   ```
+   This will store parquet files containing DNA-sequence, ATAC-seq, and mappability data at `./data/stage1_outputs/predict_imr90/`. By default, all chromosomes will be used. To use a subset of chromosomes, mention the chromosomes under "chromosome: predict:" in [`./Stage1/configs/datamodule/validation/cross_cell.yaml`](https://github.com/BoevaLab/UniversalEPI/blob/main/Stage1/configs/datamodule/validation/cross-cell.yaml).
 
 <br/>
 
 ## UniversalEPI Inference
 
 1. Create the input dataset
-  ```
-  python ./Stage2/create_dataset.py -g ./data/stage1_outputs/predict_imr90 -s ./data/processed_data/
-  ```
-  This will generate `./data/processed_data/imr90_input.npz` containing information of all autosomes. 
-  To select a subset of chromosomes, use
-  ```
-  python ./Stage2/create_dataset.py -g ./data/stage1_outputs/predict_imr90 -s ./data/processed_data/ --chroms 2 6 19
-  ```
-2. Ensure that the test_dir path in [`./Stage2/configs/configs.yaml`]() correctly maps to `data/processed_data/imr90_input.npz`. Then run
-  ```
-  python ./Stage2/predict.py --config_dir ./Stage2/configs/configs.yaml
-  ```
-  This generates `./results/imr90/paper-hg38-map-concat-stage1024-rf-lrelu-eval-stg-newsplit-newdata-atac-var-beta-neg-s1337/results.npz` which stores the following information:
-  - chr (chromosome)
-  - pos1 (position of ATAC-seq peak 1)
-  - pos2 (position of ATAC-seq peak 2)
-  - predictions (log Hi-C between peaks 1 and 2)
-  - variance (aleatoric uncertainty associated with the prediction)
+   ```
+   python ./Stage2/create_dataset.py -g ./data/stage1_outputs/predict_imr90 -s ./data/processed_data/
+   ```
+   This will generate `./data/processed_data/imr90_input.npz` containing information on all autosomes. 
+   To select a subset of chromosomes, use
+   ```
+   python ./Stage2/create_dataset.py -g ./data/stage1_outputs/predict_imr90 -s ./data/processed_data/ --chroms 2 6 19
+   ```
+2. Ensure that the test_dir path in [`./Stage2/configs/configs.yaml`](https://github.com/BoevaLab/UniversalEPI/blob/main/Stage2/configs/configs.yaml) correctly maps to `data/processed_data/imr90_input.npz`. Then run
+   ```
+   python ./Stage2/predict.py --config_dir ./Stage2/configs/configs.yaml
+   ```
+   This generates `./results/imr90/paper-hg38-map-concat-stage1024-rf-lrelu-eval-stg-newsplit-newdata-atac-var-beta-neg-s1337/results.npz` which stores the following information:
+    - chr (chromosome)
+    - pos1 (position of ATAC-seq peak 1)
+    - pos2 (position of ATAC-seq peak 2)
+    - predictions (log Hi-C between peaks 1 and 2)
+    - variance (aleatoric uncertainty associated with the prediction)
 3. To obtain epistemic uncertainty, repeat Step 2 for each of the ten model checkpoints and take variance in predictions across the runs.
 
 <br/>
 
-## UniversalEPI Training and Testing (optional)
+## UniversalEPI Training and Testing
 
-a. Train Stage1. It uses training cell lines defined in [`./Stage1/configs/datamodule/validation/cross_cell.yaml`]().
+a. Train Stage1. It uses training cell lines defined in [`./Stage1/configs/datamodule/validation/cross_cell.yaml`](https://github.com/BoevaLab/UniversalEPI/blob/main/Stage1/configs/datamodule/validation/cross-cell.yaml).
   ```
   python ./Stage1/train.py
   ```
-b. Test Stage1
+b. Test Stage1. It uses test cell lines defined in [`./Stage1/configs/datamodule/validation/cross_cell.yaml`](https://github.com/BoevaLab/UniversalEPI/blob/main/Stage1/configs/datamodule/validation/cross-cell.yaml).
   ```
-  python ./Stage1/test.py. It uses test cell lines defined in [`./Stage1/configs/datamodule/validation/cross_cell.yaml`]().
+  python ./Stage1/test.py
   ```
 c. Train Stage2
   - Create input dataset for training and validation.
@@ -83,10 +83,10 @@ c. Train Stage2
   - Merge training and validation cell lines
     ```
     python ./Stage2/merge_dataset.py --cell_lines gm12878 k562 --data_dir ./data/processed_data/ --phase train
-    python ./Stage2/merge_dataset.py --cell_lines gm12878 k562 --data_dir ./data/processed_data/ --phase test
+    python ./Stage2/merge_dataset.py --cell_lines gm12878 k562 --data_dir ./data/processed_data/ --phase val
     ```
     This results in `train_dataset.npz` and `val_dataset.npz` in `./data/processed_data`.
-  - Ensure that train and validation paths in [`./Stage2/configs/configs.yaml`]() are correct. Then run
+  - Ensure that train and validation paths in [`./Stage2/configs/configs.yaml`](https://github.com/BoevaLab/UniversalEPI/blob/main/Stage2/configs/configs.yaml) are correct. Then run
     ```
     python ./Stage2/train.py --config_dir ./Stage2/configs/configs.yaml
     ```
@@ -96,7 +96,15 @@ d. Test Stage2
     python ./Stage2/create_dataset.py -g ./data/stage1_outputs/predict_hepg2 -s ./data/processed_data/ --hic_data_dir ./data/hic/ --mode test
     ```
     This creates `./data/processed_data/hepg2_test.npz`.
-  - Ensuring the test_dir path in [`./Stage2/configs/configs.yaml`]() are correct, run
+  - Ensuring the test_dir path in [`./Stage2/configs/configs.yaml`](https://github.com/BoevaLab/UniversalEPI/blob/main/Stage2/configs/configs.yaml) are correct, run
     ```
     python ./Stage2/eval.py --config_dir ./Stage2/configs/configs.yaml
     ```
+    This generates `./results/hepg2/paper-hg38-map-concat-stage1024-rf-lrelu-eval-stg-newsplit-newdata-atac-var-beta-neg-s1337/results.npz` which stores the following information:
+     - chr (chromosome)
+     - pos1 (position of ATAC-seq peak 1)
+     - pos2 (position of ATAC-seq peak 2)
+     - predictions (log Hi-C between peaks 1 and 2)
+     - variance (aleatoric uncertainty associated with the prediction)
+     - targets (log Hi-C)
+  - [Plotting scripts]() can then be used to generate evaluation plots 
