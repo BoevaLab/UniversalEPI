@@ -14,7 +14,7 @@ b. Target data processing
   - [`preprocessing/hic`](https://github.com/BoevaLab/UniversalEPI/tree/main/preprocessing/hic) contains the details for processing Hi-C data from your raw input (.hic or .cool) or processed files (pairwise interaction files). This includes Hi-C normalization.
   - Combine ATAC-seq and Hi-C to extract targets corresponding to ATAC peaks for each training cell line
     ```
-    python ./preprocessing/prepare_target_data.py --cell_line gm12878 --atac_bed_path ./data/atac/raw/GM12878_dedup.bed --hic_data_dir ./preprocessing/hic/data
+    python ./preprocessing/prepare_target_data.py --cell_line gm12878 --atac_bed_path ./data/atac/raw/GM12878_dedup.bed --hic_data_dir ./data/hic/
     ```
     This also saves the updated ATAC-seq peaks at `./data/atac/raw/GM12878_dedup_neg.bed` with 10% pseudopeaks added
   - Combine ATAC-seq and Hi-C to extract targets corresponding to ATAC peaks for each test cell line
