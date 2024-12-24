@@ -6,7 +6,7 @@ if [[ $# -lt 1 ]]; then
   exit 1
 fi
 
-multiBigwigSummary BED-file -b ../data/atac/raw/GM12878.bigWig "$@"  -o results.npz --BED ../data/atac/merged_ctcf.bed --outRawCounts scores_tmp.tab
+multiBigwigSummary BED-file -b ../../data/atac/raw/GM12878.bigWig "$@"  -o results.npz --BED ../../data/atac/merged_ctcf.bed --outRawCounts scores_tmp.tab
 
 sed '1s/^#//' scores_tmp.tab > scores.tab
 rm scores_tmp.tab results.npz

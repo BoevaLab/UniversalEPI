@@ -200,7 +200,7 @@ def parse_args():
     parser.add_argument("--cell_line", type=str, help="Cell line", required=True)
     parser.add_argument("--atac_bed_path", type=str, help="Path to the ATAC bed file", required=True)
     parser.add_argument("--resolution", default=5000, type=int, help="Resolution")
-    parser.add_argument("--hic_data_dir", default='./hic/data/', type=str, help="Path to the directory containing Hi-C data")
+    parser.add_argument("--hic_data_dir", default='./data/hic', type=str, help="Path to the directory containing Hi-C data")
     parser.add_argument("--chrom", default=[*range(1,23)], type=int, nargs="+", help="Chromosomes to consider")
     parser.add_argument("--max_len", default=2_000_000, type=int, help="Maximum length of input")
     parser.add_argument("--genome", default='hg38', type=str, help="Genome")

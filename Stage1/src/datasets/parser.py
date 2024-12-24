@@ -30,7 +30,7 @@ class OnlineResource:
         # Perform basic configuration checks
         self._check_source_config(source)
         self._check_destination_config(destination)
-
+        
         # Save properties
         self._source = source
         self._destination = destination
@@ -224,21 +224,24 @@ class SignalResource(SpeciesResource):
     def download_path(self) -> str:
         # Override the path where the genome is downloaded to
         return os.path.expanduser(
-            f"{self.download_root}/{self.species}/{self.cell_line}/{self.data_type}"
+            #f"{self.download_root}/{self.species}/{self.cell_line}/{self.data_type}"
+            f"{self.download_root}"
         )
 
     @property
     def extract_path(self) -> str:
         # Override the path where the genome is extracted to
         return os.path.expanduser(
-            f"{self.extract_root}/{self.species}/{self.cell_line}/{self.data_type}"
+            #f"{self.extract_root}/{self.species}/{self.cell_line}/{self.data_type}"
+            f"{self.extract_root}"
         )
 
     @property
     def process_path(self) -> str:
         # Override the path where the genome is processed to
         return os.path.expanduser(
-            f"{self.process_root}/{self.species}/{self.cell_line}/{self.data_type}"
+            #f"{self.process_root}/{self.species}/{self.cell_line}/{self.data_type}"
+            f"{self.process_root}"
         )
 
 

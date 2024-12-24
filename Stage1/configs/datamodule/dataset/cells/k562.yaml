@@ -13,7 +13,7 @@ K562:
       # GEO Accession: 
       # UCSC Accession: 
       source: 
-        url: file://${data_dir}/raw/human/K562/atacsignal/K562_p_edger.bw #p-val
+        url: file://${data_dir}/raw/K562_normalized.bw #p-val
         md5: null
         
 
@@ -22,7 +22,7 @@ K562:
       # GEO Accession: 
       # UCSC Accession: 
       source: 
-        url: file://${data_dir}/raw/human/K562/atacpeak/K562_dedup.bed
+        url: file://${data_dir}/raw/K562_dedup_neg.bed
         md5: null
 
         

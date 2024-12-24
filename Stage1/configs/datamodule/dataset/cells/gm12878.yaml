@@ -13,7 +13,7 @@ Gm12878:
       # GEO Accession: 
       # UCSC Accession: 
       source: 
-        url: file://${data_dir}/raw/human/Gm12878/atacsignal/GM12878_p_edger.bw #p-val
+        url: file://${data_dir}raw/GM12878_normalized.bw #p-val
         md5: null
         
 
@@ -22,7 +22,7 @@ Gm12878:
       # GEO Accession: 
       # UCSC Accession: 
       source: 
-        url: file://${data_dir}/raw/human/Gm12878/atacpeak/GM12878_dedup.bed #replace path
+        url: file://${data_dir}raw/GM12878_dedup_neg.bed #replace path
         md5: null
 
         

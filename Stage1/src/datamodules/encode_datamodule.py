@@ -82,7 +82,6 @@ class MultiCellModule(LightningDataModule):
             )
 
     def _load_dataset(self, cell_line, stage: str = "fit", cell_id=None) -> CellDataset:
-
         dataset: CellDataset = hydra.utils.instantiate(
             self.hparams.datasets[cell_line],
             cell_line=cell_line,

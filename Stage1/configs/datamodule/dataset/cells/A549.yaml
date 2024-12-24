@@ -13,7 +13,7 @@ A549:
       # GEO Accession: 
       # UCSC Accession: 
       source: 
-        url: file://${data_dir}/raw/human/A549/atacsignal/A549_p_edger.bw # p-val
+        url: file://${data_dir}/raw/A549_normalized.bw # p-val
         md5: null
         
 
@@ -22,7 +22,7 @@ A549:
       # GEO Accession: 
       # UCSC Accession: 
       source: 
-        url: file://${data_dir}/raw/human/A549/atacpeak/A549_dedup.bed
+        url: file://${data_dir}/raw/A549_dedup.bed
         md5: null
 
         

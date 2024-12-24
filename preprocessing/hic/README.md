@@ -1,26 +1,26 @@
 ## Hi-C Data Processing
 
 ### Step 0 (optional): Convert .hic or .cool files to pairwise interactions
-- If you want to obtain the pairwise interactions from `../data/hic/IMR90.hic` (as an example) at 5Kb resolution with ICE normalization.
+- If you want to obtain the pairwise interactions from `../data/hic/HEPG2.hic` (as an example) at 5Kb resolution with ICE normalization.
   ```
-  ./hic2sparse.sh ../data/hic/IMR90.hic ../data/hic/imr90 5000 --ice
+  ./hic2sparse.sh ../data/hic/HEPG2.hic ../data/hic/hepg2 5000 --ice
   ```
   Remove `--ice` if the input file is already ICE-normalized. 
 
-- Similarly, if you want to obtain the pairwise interactions from `../data/hic/IMR90.cool` (as an example) with ICE normalization.
+- Similarly, if you want to obtain the pairwise interactions from `../data/hic/HEPG2.cool` (as an example) with ICE normalization.
   ```
-  ./cool2sparse.sh ../data/hic/IMR90.cool ../data/hic/imr90 --ice
+  ./cool2sparse.sh ../data/hic/HEPG2.cool ../data/hic/hepg2 --ice
   ```
   
 - If you are interested only in a particular set of chromosomes (say, 2,6,19), the following can be used
   ```
-  ./hic2sparse.sh ../data/hic/IMR90.hic ../data/hic/imr90 5000 --ice 2 6 19
+  ./hic2sparse.sh ../data/hic/HEPG2.hic ../data/hic/hepg2 5000 --ice 2 6 19
   ```
   or
   ```
-  ./cool2sparse.sh ../data/hic/IMR90.cool ../data/hic/imr90 --ice 2 6 19
+  ./cool2sparse.sh ../data/hic/HEPG2.cool ../data/hic/hepg2 --ice 2 6 19
   ```
-The output pairwise interaction files (one per chromosome) will be stored in `../data/hic/imr90/raw_iced/`. Each file will be a tab-separated file with 3 columns: pos1, pos2, hic_score.
+The output pairwise interaction files (one per chromosome) will be stored in `../data/hic/hepg2/raw_iced/`. Each file will be a tab-separated file with 3 columns: pos1, pos2, hic_score.
 
 <br/>
 
@@ -32,7 +32,7 @@ The output pairwise interaction files (one per chromosome) will be stored in `..
 2. Ensure that for all the cell lines of interest, pairwise interaction files for each chromosome are placed in `../data/hic/<cell_line>/raw_iced/chr<chrom_number>_raw.bed`
 3. Apply normalization
    ```
-   python normalize_hic.py --cell_lines imr90 --data_dir ../data/hic
+   python normalize_hic.py --cell_lines hepg2 --data_dir ../data/hic
    ```
    By default, this script normalizes all autosomes, assumes Hi-C resolution of 5Kb, and uses `gm12878` as reference cell line. These can be modified using appropriate flags.
    

@@ -42,7 +42,7 @@ def main():
     args = parse_args()
     cell_lines = args.cell_lines
     data_dir = args.data_dir
-    ref_dir = "../data/hic/"
+    ref_dir = "../../data/hic/"
     chroms = args.chrom
     bin_size = args.bin_size
     len_bins = (args.max_len//bin_size)+1

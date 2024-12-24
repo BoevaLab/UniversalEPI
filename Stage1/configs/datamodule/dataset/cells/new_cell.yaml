@@ -15,7 +15,7 @@ defaults:
       # GEO Accession: 
       # UCSC Accession: 
       source: 
-        url: file://${data_dir}/raw/human/<cell>/atacsignal/<atac>.bigwig # Replace <atac> with the name of your bigwig file
+        url: file://${data_dir}/raw/<atac>_normalized.bw # Path to bigwig file
         md5: null
         
 
@@ -24,7 +24,7 @@ defaults:
       # GEO Accession: 
       # UCSC Accession: 
       source: 
-        url: file://${data_dir}/raw/human/<cell>/atacpeak/<atac>.bed # Replace <atac> with the name of your peak file
+        url: file://${data_dir}/raw/atacpeak/<atac>_dedup.bed # Path to peak file
         md5: null
 
     

@@ -13,7 +13,7 @@ Imr90:
       # GEO Accession: 
       # UCSC Accession: 
       source: 
-        url: file://${data_dir}/raw/human/Imr90/atacsignal/IMR90_p_edger.bw
+        url: file://${data_dir}/raw/IMR90_normalized.bw
         md5: null
         
 
@@ -22,7 +22,7 @@ Imr90:
       # GEO Accession: 
       # UCSC Accession: 
       source: 
-        url: file://${data_dir}/raw/human/Imr90/atacpeak/IMR90_dedup.bed
+        url: file://${data_dir}/raw/IMR90_dedup.bed
         md5: null
 
     

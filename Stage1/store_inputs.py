@@ -40,8 +40,6 @@ def store_input_data(cell_line: str):
 
     predict_dataloader = datamodule.predict_dataloader()
 
-    predict_dataloader = datamodule.predict_dataloader()
-
     datasets: List[CellDataset] = predict_dataloader.dataset.datasets
 
     dataset = datasets[0]
@@ -150,7 +148,7 @@ def store_input_data(cell_line: str):
 
 def argparser():
     parser = argparse.ArgumentParser(description="Predict")
-    parser.add_argument("cell_line", type=str, help="Cell line to predict", required=True)
+    parser.add_argument("--cell_line", type=str, help="Cell line to predict", required=True)
     return parser.parse_args()
 
 def main():

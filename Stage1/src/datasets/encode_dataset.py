@@ -53,7 +53,7 @@ class CellDataset(Dataset):
 
         # Data types, such as CTCF, make up the targets of this dataset. Like the genome, the will be instantiated on first access
         self._data_types_config = data_types
-
+        
         # The features and targets yield only results for the chromosomes configured in the dataset split
         self._dataset_split_config = split
 
@@ -122,7 +122,7 @@ class CellDataset(Dataset):
         log.info(f"Load all features and targets for {self._cell_line}")
 
         genome_parser = self._genome_parser
-
+        
         parsers = {
             data_type: hydra.utils.instantiate(
                 parser_config,
@@ -134,14 +134,13 @@ class CellDataset(Dataset):
             )
             for data_type, parser_config in self._data_types_config.items()
         }
-
         return parsers
 
     @cached_property
     def targets(self) -> pd.DataFrame:
 
         target_parsers = self._all_parsers
-
+        
         targets = pd.concat(
             [
                 parser.targets(self.dataset_split)
@@ -149,7 +148,7 @@ class CellDataset(Dataset):
                 if isinstance(parser, TargetSet)
             ]
         )
-
+        
         log.info(f"Apply {'global' if self.use_global_binning else 'local'} binning")
         targets = (
             self._global_binning(targets)
@@ -232,8 +231,8 @@ class CellDataset(Dataset):
         log.info("Loading mappability")
         base_dir = f"{hydra.utils.get_original_cwd()}/data/"
         self.mappability = parse_mappability(
-            f"{base_dir}/mappability/raw/k36.Umap.MultiTrackMappability.hg38.bw",
-            f"{base_dir}/mappability/processed/k36.Umap.MultiTrackMappability.hg38.pt",
+            f"{base_dir}/mappability/k36.Umap.MultiTrackMappability.hg38.bw",
+            f"{base_dir}/mappability/k36.Umap.MultiTrackMappability.hg38.pt",
             # f"{base_dir}/mappability/raw/wgEncodeCrgMapabilityAlign36mer.bigWig",
             # f"{base_dir}/mappability/processed/wgEncodeCrgMapabilityAlign36mer.pt",
             self._genome_parser.info,

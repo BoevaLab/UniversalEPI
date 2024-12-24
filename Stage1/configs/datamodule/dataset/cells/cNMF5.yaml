@@ -13,7 +13,7 @@ cNMF5:
       # GEO Accession: 
       # UCSC Accession: 
       source: 
-        url: file://${data_dir}/raw/human/cNMF5/atacsignal/cNMF5_pval_edger.bw
+        url: file://${data_dir}/raw/cNMF5_normalized.bw
         md5: null
         
 
@@ -22,7 +22,7 @@ cNMF5:
       # GEO Accession: 
       # UCSC Accession: 
       source: 
-        url: file://${data_dir}/raw/human/cNMF5/atacpeak/MERGED_dedup.bed
+        url: file://${data_dir}/raw/MERGED_dedup.bed
         md5: null
 
     

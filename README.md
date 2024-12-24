@@ -14,12 +14,12 @@ b. Target data processing
   - [`preprocessing/hic`](https://github.com/BoevaLab/UniversalEPI/tree/main/preprocessing/hic) contains the details for processing Hi-C data from your raw input (.hic or .cool) or processed files (pairwise interaction files). This includes Hi-C normalization.
   - Combine ATAC-seq and Hi-C to extract targets corresponding to ATAC peaks for each training cell line
     ```
-    python ./preprocessing/prepare_target_data.py --cell_line gm12878 --atac_bed_path ./data/atac/GM12878_dedup.bed --hic_data_dir ./preprocessing/hic/data
+    python ./preprocessing/prepare_target_data.py --cell_line gm12878 --atac_bed_path ./data/atac/raw/GM12878_dedup.bed --hic_data_dir ./preprocessing/hic/data
     ```
-    This also saves the updated ATAC-seq peaks at `./data/atac/GM12878_dedup_neg.bed` with 10% pseudopeaks added
+    This also saves the updated ATAC-seq peaks at `./data/atac/raw/GM12878_dedup_neg.bed` with 10% pseudopeaks added
   - Combine ATAC-seq and Hi-C to extract targets corresponding to ATAC peaks for each test cell line
     ```
-    python ./preprocessing/prepare_target_data.py --cell_line imr90 --atac_bed_path ./data/atac/IMR90_dedup.bed --hic_data_dir ./data/hic/ --test
+    python ./preprocessing/prepare_target_data.py --cell_line hepg2 --atac_bed_path ./data/atac/raw/HEPG2_dedup.bed --hic_data_dir ./data/hic/ --test
     ```
     The above script will run for all autosomes (chr1-22) by default. The Hi-C resolution is assumed to be 5Kb. The Hg38 genome version is considered by default. These can be modified using appropriate flags.
 
@@ -42,7 +42,8 @@ b. Target data processing
    ```
    python ./Stage2/create_dataset.py -g ./data/stage1_outputs/predict_imr90 -s ./data/processed_data/
    ```
-   This will generate `./data/processed_data/imr90_input.npz` containing information on all autosomes. 
+   This will generate `./data/processed_data/imr90_input.npz` containing information on all autosomes.
+
    To select a subset of chromosomes, use
    ```
    python ./Stage2/create_dataset.py -g ./data/stage1_outputs/predict_imr90 -s ./data/processed_data/ --chroms 2 6 19

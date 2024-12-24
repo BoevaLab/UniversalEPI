@@ -13,7 +13,7 @@ Hepg2:
       # GEO Accession: 
       # UCSC Accession: 
       source: 
-        url: file://${data_dir}/raw/human/Hepg2/atacsignal/HEPG2_p_edger.bw #p-val
+        url: file://${data_dir}/raw/HEPG2_normalized.bw #p-val
         md5: null
         
 
@@ -22,7 +22,7 @@ Hepg2:
       # GEO Accession: 
       # UCSC Accession: 
       source: 
-        url: file://${data_dir}/raw/human/Hepg2/atacpeak/HEPG2_dedup.bed
+        url: file://${data_dir}/raw/HEPG2_dedup.bed
         md5: null
 
         
