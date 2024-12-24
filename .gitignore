@@ -7,8 +7,8 @@ __pycache__/
 *.so
 
 # Blacklist files
-blacklist/basenji_blacklist.bed
-blacklist/basenji_unmappable.bed
+basenji_blacklist.bed
+basenji_unmappable.bed
 
 # Distribution / packaging
 .Python
