@@ -33,13 +33,14 @@ def combine_input(path):
         'dnase',            # ATAC signal
         'mappability',      # mappability signal
         ]
-
-        input_df = pd.read_parquet(f"{path}chr1.pq", columns=COLUMNS, engine='pyarrow').set_index('original_index')
+        df_chr1_path = os.path.join(path, 'chr1.pq')
+        input_df = pd.read_parquet(df_chr1_path, columns=COLUMNS, engine='pyarrow').set_index('original_index')
         input_df['chrom'] = 'chr1'
         for chr in chromosome_nums:
             if chr == 1:
                 continue
-            df = pd.read_parquet(f"{path}chr{chr}.pq", columns=COLUMNS, engine='pyarrow').set_index('original_index')
+            df_path = os.path.join(path, f'chr{chr}.pq')
+            df = pd.read_parquet(df_path, columns=COLUMNS, engine='pyarrow').set_index('original_index')
             df['chrom'] = f'chr{chr}'
             input_df = pd.concat([input_df, df], ignore_index=True)
         gc.collect()
@@ -202,8 +203,8 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Stage2 Data Generation")
     parser.add_argument('-g', '--genomic_data_path', type=str, help='path to the genomic data', required=True)
     parser.add_argument('-s','--save_dir', type=str, help='path where to store data', required=True)
-    parser.add_argument('-h', '--hic_data_dir', type=str, help='path to the hic data', default=None)
     parser.add_argument('-m', '--mode', type=str, help='mode of data generation', default='test')
+    parser.add_argument('--hic_data_dir', type=str, help='path to the hic data', default=None)
     parser.add_argument('--seq_len', type=int, help='sequence length', default=401)
     parser.add_argument('--chroms', nargs='+', type=int, help='chromosomes to generate data for', default=None)
     return parser.parse_args()

@@ -24,6 +24,9 @@ def eval(opt, cell_line):
     if torch.cuda.is_available():
         use_gpu = True
         device = torch.device("cuda")
+    else:
+        use_gpu = False
+        device = torch.device("cpu")
 
     model = Transformer_Encoder(
         input_dim=opt.n_feat,
@@ -120,7 +123,9 @@ def eval(opt, cell_line):
             pos1_list = list(pos1_i[:, 1:].flatten())
             pos2_list = list(pos2_i[:, 1:].flatten())
 
-            chr_list = list(meta_i_val[:, :, -2].detach().cpu().numpy().flatten())
+            chr_i = meta_i_val[:, :, -2].detach().cpu().numpy()
+            chr_i = chr_i[:, ind_b]
+            chr_list = list(chr_i[:, 1:].flatten())
 
             predictions.extend(output_list)
             targets.extend(target_list)
