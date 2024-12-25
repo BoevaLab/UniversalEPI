@@ -36,7 +36,7 @@ class NPZDatasetRaw(Dataset):
             self.target = None
 
     def __len__(self):
-        return len(self.indexing)
+        return len(self.indexing)-2*self.FLANK
 
     def __getitem__(self, idx):
 
