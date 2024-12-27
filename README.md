@@ -73,7 +73,6 @@ b. Test Stage1. It uses test cell lines defined in [`./Stage1/configs/datamodule
   ```
   python ./Stage1/test.py
   ```
-  [Plotting scripts](https://github.com/BoevaLab/UniversalEPI/tree/main/plotting_scripts) can then be used to generate evaluation plots.
   
 c. Train Stage2
   - Create input dataset for training and validation.
@@ -112,4 +111,4 @@ d. Test Stage2
      - predictions (log Hi-C between peaks 1 and 2)
      - variance (aleatoric uncertainty associated with the prediction)
      - targets (log Hi-C)
-  - [Plotting scripts](https://github.com/BoevaLab/UniversalEPI/tree/main/plotting_scripts) can then be used to generate evaluation plots 
+  - `./Stage2/plot_scatter.ipynb` can then be used to generate evaluation plots.

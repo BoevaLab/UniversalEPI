@@ -12,7 +12,6 @@ from src.models.trepii_model import DeepC
 import numpy as np
 import torch
 
-import os
 
 def get_logger():
     log = utils.get_logger(__name__)
