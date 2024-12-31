@@ -5,12 +5,12 @@ UniversalEPI: Harnessing Attention Mechanisms to Decode Chromatin Interactions i
 
 <br/>
 
-## Data Preprocessing
+## Step 1: Data Preprocessing
 
 a. Input data processing
   - The details for processing ATAC-seq data from your raw input (BAM) or processed files (signal p-values bigwig and peaks bed) can be found in [`preprocessing/atac`](https://github.com/BoevaLab/UniversalEPI/tree/main/preprocessing/atac). This includes normalizing the bigwig and deduplication of ATAC-seq peaks.
 
-b. Target data processing
+b. Target data processing (optional, not required for inference)
   - [`preprocessing/hic`](https://github.com/BoevaLab/UniversalEPI/tree/main/preprocessing/hic) contains the details for processing Hi-C data from your raw input (.hic or .cool) or processed files (pairwise interaction files). This includes Hi-C normalization.
   - Combine ATAC-seq and Hi-C to extract targets corresponding to ATAC peaks for each training cell line
     ```
@@ -25,9 +25,9 @@ b. Target data processing
 
 <br/>
 
-## Extract Genomic Features
+## Step 2: Extract Genomic Features from Stage 1
 
-1. Create a new config file for your cell line or condition in [`./Stage1/`](https://github.com/BoevaLab/UniversalEPI/tree/main/Stage1). See [`./Stage1/`](https://github.com/BoevaLab/UniversalEPI/tree/main/Stage1) for more details on how this can be done.
+1. Create a new config file for your cell line or condition in [`./Stage1/`](https://github.com/BoevaLab/UniversalEPI/tree/main/Stage1). See [`./Stage1/`](https://github.com/BoevaLab/UniversalEPI/tree/main/Stage1) for more details on this.
 2. Store the genomic inputs
    ```
    python ./Stage1/store_inputs.py --cell_line imr90
@@ -36,7 +36,7 @@ b. Target data processing
 
 <br/>
 
-## UniversalEPI Inference
+## Step 3: Generate Hi-C Predictions from Stage 2
 
 1. Create the input dataset
    ```
@@ -75,7 +75,7 @@ b. Test Stage1. It uses test cell lines defined in [`./Stage1/configs/datamodule
   ```
   
 c. Train Stage2
-  - Create input dataset for training and validation.
+  - Create an input dataset for training and validation.
     ```
     python ./Stage2/create_dataset.py -g ./data/stage1_outputs/predict_gm12878 -s ./data/processed_data/ --hic_data_dir ./data/hic/ --mode train
     python ./Stage2/create_dataset.py -g ./data/stage1_outputs/predict_k562 -s ./data/processed_data/ --hic_data_dir ./data/hic/ --mode train
@@ -95,7 +95,7 @@ c. Train Stage2
     ```
 
 d. Test Stage2
-  - Create dataset for testing
+  - Create a dataset for testing
     ```
     python ./Stage2/create_dataset.py -g ./data/stage1_outputs/predict_hepg2 -s ./data/processed_data/ --hic_data_dir ./data/hic/ --mode test
     ```
