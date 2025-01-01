@@ -10,7 +10,7 @@ UniversalEPI: Harnessing Attention Mechanisms to Decode Chromatin Interactions i
 a. Input data processing
   - The details for processing ATAC-seq data from your raw input (BAM) or processed files (signal p-values bigwig and peaks bed) can be found in [`preprocessing/atac`](https://github.com/BoevaLab/UniversalEPI/tree/main/preprocessing/atac). This includes normalizing the bigwig and deduplication of ATAC-seq peaks.
 
-b. Target data processing (optional, not required for inference)
+b. Target data processing (only needed for training and testing)
   - [`preprocessing/hic`](https://github.com/BoevaLab/UniversalEPI/tree/main/preprocessing/hic) contains the details for processing Hi-C data from your raw input (.hic or .cool) or processed files (pairwise interaction files). This includes Hi-C normalization.
   - Combine ATAC-seq and Hi-C to extract targets corresponding to ATAC peaks for each training cell line
     ```
