@@ -12,8 +12,8 @@ UniversalEPI: Harnessing Attention Mechanisms to Decode Chromatin Interactions i
   conda env create -f environment.yml
   ```
   This will create an environment named "universalepi".
-- Download the data directory from <TBD>.
-- Download the model checkpoints from <TBD>.
+- Download the data directory from <TBD> and place it in the root directory.
+- Download the model checkpoints from <TBD> and place it in the root directory.
 
 ## Step 1: Data Preprocessing
 
