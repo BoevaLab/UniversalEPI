@@ -7,7 +7,7 @@
 # data paths
   train_dir: data/processed_data/train_dataset.npz          # training data
   val_dir: data/processed_data/val_dataset.npz              # validation data for evaluation
-  test_dir: data/processed_data/imr90_input.npz             # test data for evaluation
+  test_dir: data/processed_data/hepg2_input.npz             # test data for evaluation
   logs_dir: checkpoints/stage2_models_gm12878_k562_all      # directory where model checkpoints will be saved
   stage_1_model: checkpoints/stage1_gm12878_k562_model.pth  # path to stage-1 model
 

@@ -18,10 +18,7 @@ This will create `../data/atac/raw/IMR90.pval.signal.bigwig` and `../data/atac/r
 
 ### Step 1: Cross-cell-type normalization of ATAC bigwig
 Once this is done, proceed with the following steps
-1. Download GM12878 ATAC-seq bigwig which will be used as reference and place it in `../../data/atac/raw`
-   ```
-   wget https://www.encodeproject.org/files/ENCFF667MDI/@@download/ENCFF667MDI.bigWig -O ../../data/atac/raw/GM12878.bigWig
-   ```
+1. Ensure that GM12878 ATAC-seq bigwig, which will be used as reference, is present in `../../data/atac/raw`
 2. Get scaling factors for each bigwig
    ```
    ./normalize_atac.sh ../../data/atac/raw/*.bigwig

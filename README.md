@@ -5,6 +5,16 @@ UniversalEPI: Harnessing Attention Mechanisms to Decode Chromatin Interactions i
 
 <br/>
 
+## Step 0: Requirements
+
+- You can install the necessary packages by creating a conda environment using the provided .yml file:
+  ```
+  conda env create -f environment.yml
+  ```
+  This will create an environment named "universalepi".
+- Download the data directory from <TBD>.
+- Download the model checkpoints from <TBD>.
+
 ## Step 1: Data Preprocessing
 
 a. Input data processing
@@ -111,4 +121,4 @@ d. Test Stage2
      - predictions (log Hi-C between peaks 1 and 2)
      - variance (aleatoric uncertainty associated with the prediction)
      - targets (log Hi-C)
-  - `./Stage2/plot_scatter.ipynb` can then be used to generate evaluation plots.
+  - `./Stage2/plot_scores.ipynb` can then be used to generate evaluation plots.

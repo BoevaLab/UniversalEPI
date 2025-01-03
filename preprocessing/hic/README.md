@@ -25,10 +25,7 @@ The output pairwise interaction files (one per chromosome) will be stored in `..
 <br/>
 
 ### Step 1: Cross-cell-type normalization
-1. Download the GM12878 raw_iced files and place them in `../data/hic/gm12878/raw_iced`. These will be used as reference for normalization.
-  ```
-  wget TBD
-  ```
+1. Ensure that the GM12878 raw_iced files are placed in `../data/hic/gm12878/raw_iced`. These will be used as reference for normalization.
 2. Ensure that for all the cell lines of interest, pairwise interaction files for each chromosome are placed in `../data/hic/<cell_line>/raw_iced/chr<chrom_number>_raw.bed`
 3. Apply normalization
    ```
