@@ -5,7 +5,7 @@ UniversalEPI: Harnessing Attention Mechanisms to Decode Chromatin Interactions i
 
 <br/>
 
-## Step 0: Requirements
+## Requirements
 
 - You can install the necessary packages by creating a conda environment using the provided .yml file:
   ```
