@@ -3,6 +3,8 @@ UniversalEPI: Harnessing Attention Mechanisms to Decode Chromatin Interactions i
 
 [![Preprint](https://img.shields.io/badge/preprint-available-green)](https://doi.org/10.1101/2024.11.22.624813) &nbsp;
 
+UniversalEPI is an attention-based deep ensemble designed to predict enhancer-promoter interactions up to 2 Mb, which can generalize across unseen cell types using only DNA sequence and chromatin accessibility (ATAC-seq) data as input. 
+
 <br/>
 
 ## Requirements
@@ -13,7 +15,7 @@ UniversalEPI: Harnessing Attention Mechanisms to Decode Chromatin Interactions i
   ```
   This will create an environment named "universalepi".
 - Download the [data directory](https://polybox.ethz.ch/index.php/s/YbNWDlOy2waE70V), unzip it, and place it in the root directory such that you have `./data`.
-- Download the model checkpoints from <TBD> and place it in the root directory.
+- Download the [model checkpoints]() and place each of them in the `./checkpoints` directory. Unzip each checkpoint. 
 
 <br/> 
 

@@ -5,12 +5,14 @@ import pandas as pd
 def iced2sparse(iced_file, output_dir, chroms):
     hic = pd.read_csv(iced_file, sep='\t', header=None, names=['chr', 'bin1', 's1', 's2', 'bin2', 's3', 'score'])
     hic = hic[['chr', 'bin1', 'bin2', 'score']]
-    for chr in chroms:
-        result = hic[hic.chr == chr]
-        if 'chr' in chr:
-            chr_str = chr
+    for chrom in chroms:
+        result = hic[hic['chr'] == int(chrom)]
+        if 'chr' in chrom:
+            chr_str = chrom
         else:
-            chr_str = 'chr' + chr
+            chr_str = 'chr' + chrom
+        if len(result) == 0:
+            result = hic[hic['chr'] == chr_str]
         df = result[['bin1', 'bin2', 'score']]
         os.makedirs(os.path.join(output_dir, 'raw_iced'), exist_ok=True)
         out_path = os.path.join(output_dir, 'raw_iced', f'{chr_str}_raw.bed')

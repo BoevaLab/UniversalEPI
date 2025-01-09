@@ -41,6 +41,7 @@ mkdir -p "$output_dir"
 
 # Step 0: Convert .hic to .cool
 hicConvertFormat -m "$input_path" -o "$tmp_cool_path" --inputFormat hic --outputFormat cool --resolutions "$resolution"
+mv "$output_dir/tmp_${resolution}.cool" "$tmp_cool_path"
 echo "Converted .hic to .cool"
 
 # Step 1: Convert .cool to .h5
@@ -60,15 +61,16 @@ fi
 
 # Step 3: Convert h5 to ginteractions
 hicConvertFormat -m "$tmp_path" -o "$ginteractions_path" --inputFormat h5 --outputFormat ginteractions
+out_tmp_path="${ginteractions_path}.tsv"
 echo "Converted .h5 to .ginteractions"
 
 # Clean up temporary files
 rm "$tmp_path"
 
 # Step 4: Convert ginteractions to sparse format using Python script
-python ./tsv2sparse.py "$ginteractions_path" "$output_dir" "${chromosomes[@]}"
+python ./tsv2sparse.py --input_file "$out_tmp_path" --output_dir "$output_dir" --chroms "${chromosomes[@]}"
 
 # Clean up temporary files
-rm "$gineractions_path"
+rm $out_tmp_path
 
 echo "Conversion completed. Output saved to: $output_dir/raw_iced"

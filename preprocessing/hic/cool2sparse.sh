@@ -32,7 +32,7 @@ fi
 # Set temporary and final paths
 tmp_path="$output_dir/tmp.h5"
 ice_path="$output_dir/ice_corrected.h5"
-ginteractions_path="$output_dir/ginteractions.h5"
+ginteractions_path="$output_dir/tmp.ginteractions"
 
 # Create output directory if it doesn't exist
 mkdir -p "$output_dir"
@@ -50,15 +50,16 @@ fi
 
 # Step 3: Convert h5 to ginteractions
 hicConvertFormat -m "$tmp_path" -o "$ginteractions_path" --inputFormat h5 --outputFormat ginteractions
+tmp_out_path="$ginteractions_path.tsv"
 echo "Converted .h5 to .ginteractions"
 
 # Clean up temporary files
 rm "$tmp_path"
 
 # Step 4: Convert ginteractions to sparse format using Python script
-python ./tsv2sparse.py "$ginteractions_path" "$output_dir" "${chromosomes[@]}"
+python ./tsv2sparse.py --input_file "$tmp_out_path" --output_dir "$output_dir" --chroms "${chromosomes[@]}"
 
 # Clean up temporary files
-rm "$gineractions_path"
+rm $tmp_out_path
 
 echo "Conversion completed. Output saved to: $output_dir"
