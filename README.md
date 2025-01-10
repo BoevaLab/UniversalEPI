@@ -1,5 +1,5 @@
 # UniversalEPI
-UniversalEPI: Harnessing Attention Mechanisms to Decode Chromatin Interactions in Rare and Unexplored Cell Types
+**UniversalEPI: Harnessing Attention Mechanisms to Decode Chromatin Interactions in Rare and Unexplored Cell Types**
 
 [![Preprint](https://img.shields.io/badge/preprint-available-green)](https://doi.org/10.1101/2024.11.22.624813) &nbsp;
 [![DOI](https://zenodo.org/badge/649742908.svg)](https://doi.org/10.5281/zenodo.14622040)
