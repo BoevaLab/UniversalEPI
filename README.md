@@ -6,6 +6,9 @@ UniversalEPI: Harnessing Attention Mechanisms to Decode Chromatin Interactions i
 
 UniversalEPI is an attention-based deep ensemble designed to predict enhancer-promoter interactions up to 2 Mb, which can generalize across unseen cell types using only DNA sequence and chromatin accessibility (ATAC-seq) data as input. 
 
+![UniversalEPI architecture](https://github.com/user-attachments/assets/d5e339f1-47cb-4d71-9ad2-69be52de757c)
+
+
 <br/>
 
 ## Requirements
