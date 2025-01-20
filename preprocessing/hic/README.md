@@ -12,14 +12,6 @@
   ./cool2sparse.sh ../data/hic/HEPG2.cool ../data/hic/hepg2 --ice
   ```
   
-- If you are interested only in a particular set of chromosomes (say, 2,6,19), the following can be used
-  ```
-  ./hic2sparse.sh ../data/hic/HEPG2.hic ../data/hic/hepg2 5000 --ice 2 6 19
-  ```
-  or
-  ```
-  ./cool2sparse.sh ../data/hic/HEPG2.cool ../data/hic/hepg2 --ice 2 6 19
-  ```
 The output pairwise interaction files (one per chromosome) will be stored in `../data/hic/hepg2/raw_iced/`. Each file will be a tab-separated file with 3 columns: pos1, pos2, hic_score.
 
 <br/>
