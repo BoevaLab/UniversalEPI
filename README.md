@@ -55,19 +55,13 @@ b. Target data processing (only needed for [training and testing](https://github
 
 ## Step 3: Generate Hi-C Predictions from Stage 2
 
-1. Create the input dataset
+1. Ensure that the atac_path (`data/stage1_outputs/`) in [`./Stage2/configs/configs.yaml`](https://github.com/BoevaLab/UniversalEPI/blob/main/Stage2/configs/configs.yaml) is correctly set. Then run
    ```
-   python ./Stage2/create_dataset.py -g ./data/stage1_outputs/predict_imr90 -s ./data/processed_data/
+   python ./Stage2/predict.py --config_dir ./Stage2/configs/configs.yaml --cell_line_predict imr90
    ```
-   This will generate `./data/processed_data/imr90_input.npz` containing information on all autosomes.
-
-   To select a subset of chromosomes, use
+   To select a subset of chromsomes for prediction, use
    ```
-   python ./Stage2/create_dataset.py -g ./data/stage1_outputs/predict_imr90 -s ./data/processed_data/ --chroms 2 6 19
-   ```
-2. Ensure that the test_dir path in [`./Stage2/configs/configs.yaml`](https://github.com/BoevaLab/UniversalEPI/blob/main/Stage2/configs/configs.yaml) correctly maps to `data/processed_data/imr90_input.npz`. Then run
-   ```
-   python ./Stage2/predict.py --config_dir ./Stage2/configs/configs.yaml
+   python ./Stage2/predict.py --config_dir ./Stage2/configs/configs.yaml --cell_line_predict imr90 --chroms_predict 2 6 19
    ```
    This generates `./results/imr90/paper-hg38-map-concat-stage1024-rf-lrelu-eval-stg-newsplit-newdata-atac-var-beta-neg-s1337/results.npz` which stores the following information:
     - chr (chromosome)
@@ -75,7 +69,7 @@ b. Target data processing (only needed for [training and testing](https://github
     - pos2 (position of ATAC-seq peak 2)
     - predictions (log Hi-C between peaks 1 and 2)
     - variance (aleatoric uncertainty associated with the prediction)
-3. To obtain epistemic uncertainty, repeat Step 2 for each of the ten model checkpoints and take variance in predictions across the runs.
+2. To obtain epistemic uncertainty, repeat Step 2 for each of the ten model checkpoints and take variance in predictions across the runs.
 
 <br/>
 
