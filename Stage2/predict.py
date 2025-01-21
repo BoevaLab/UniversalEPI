@@ -68,7 +68,7 @@ def predict(opt, cell_line):
         model.to(device)
         featNet.to(device)
 
-    dataset_test = NPZDatasetRaw(opt.test_dir)
+    dataset_test = NPZDatasetRaw(data_dir=opt.test_dir)
 
     dataloader_test = DataLoader(
         dataset_test, shuffle=False, batch_size=1, drop_last=False, num_workers=opt.num_workers
@@ -87,7 +87,6 @@ def predict(opt, cell_line):
     chr = []
     pos1 = []
     pos2 = []
-
 
     with torch.no_grad():
         for [dnase_i_val, seq_i_val, _, meta_i_val, map_i_val, _] in tqdm(dataloader_test):

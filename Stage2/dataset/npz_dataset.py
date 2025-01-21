@@ -10,14 +10,20 @@ from torch.utils.data import DataLoader, Dataset
 
 
 class NPZDatasetRaw(Dataset):
-    def __init__(self, data_dir, transform=None):
+    def __init__(self, data_dir=None, data=None, transform=None):
         """
         Args:
             data_dir: npz file path
+            data: npz file
             transform (callable, optional): Optional transform to be applied
                 on a sample.
         """
-        data = np.load(data_dir)
+
+        if data_dir:
+            data = np.load(data_dir)
+        elif data is None:
+            raise ValueError("Data is not provided")
+
         self.transform = transform  # if apply any transformation
         self.FLANK = 200
         self.indexing = data["indexing"]
@@ -25,7 +31,7 @@ class NPZDatasetRaw(Dataset):
         self.sequence = data["sequence"]
         self.meta = data["meta"]
         self.mappability = data["mappability"]
-        
+
         if "blacklist" in data.keys():
             self.blacklist = data["blacklist"]
         else:
@@ -36,7 +42,7 @@ class NPZDatasetRaw(Dataset):
             self.target = None
 
     def __len__(self):
-        return len(self.indexing)-2*self.FLANK
+        return len(self.indexing) - 2 * self.FLANK
 
     def __getitem__(self, idx):
 
@@ -53,7 +59,7 @@ class NPZDatasetRaw(Dataset):
             y = torch.from_numpy(np.squeeze(np.array(self.target[idx, :]))).float()
         else:
             y = torch.zeros(1)
-        
+
         if self.blacklist is None:
             mask = torch.zeros(1)
         else:
