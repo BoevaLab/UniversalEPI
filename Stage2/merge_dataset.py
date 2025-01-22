@@ -158,13 +158,13 @@ def merge_datasets(cell_lines, phase, res, data_dir=None, data_dict=None, save_d
     if save_dir:
         np.savez(
             os.path.join(save_dir, f"{phase}_dataset.npz"),
-            target=target,
-            dnase=dnase,
-            sequence=sequence,
-            meta=meta,
-            indexing=indexing,
-            mappability=mappability,
-            blacklist=blacklist,
+            target=output_dict["target"],
+            dnase=output_dict["dnase"],
+            sequence=output_dict["sequence"],
+            meta=output_dict["meta"],
+            indexing=output_dict["indexing"],
+            mappability=output_dict["mappability"],
+            blacklist=output_dict["blacklist"],
         )
         print(f"Dataset for {phase} phase saved successfully")
 
@@ -189,7 +189,7 @@ def main():
     data_dir = args.data_dir
 
     assert phase in ["train", "val"], "Phase must be one of ['train', 'val']"
-    merge_datasets(cell_lines=cell_lines, phase=phase, res=res, data_dir=data_dir, save_dir=save_dir)
+    merge_datasets(cell_lines=cell_lines, phase=phase, res=res, data_dir=data_dir, save_dir=args.save_dir)
 
 
 if __name__ == "__main__":
