@@ -86,15 +86,15 @@ b. Test Stage1. It uses test cell lines defined in [`./Stage1/configs/datamodule
   ```
   
 c. Train Stage2
-  - Ensure that genomic data (./data/stage1_outputs/predict_{cell_line}) and HiC paths (./data/hic/) in [`./Stage2/configs/configs.yaml`](https://github.com/BoevaLab/UniversalEPI/blob/main/Stage2/configs/configs.yaml) are correct. Then run
+  - Ensure that genomic data (`./data/stage1_outputs/predict_{cell_line}`) and HiC paths (`./data/hic/`) in [`./Stage2/configs/configs.yaml`](https://github.com/BoevaLab/UniversalEPI/blob/main/Stage2/configs/configs.yaml) are correct. Then run
     ```
     python ./Stage2/main.py --config_dir ./Stage2/configs/configs.yaml --mode train
     ```
-  - If npz files are already generated using ['create_dataset.py'](https://github.com/BoevaLab/UniversalEPI/blob/main/Stage2/create_dataset.py) and ['merge_dataset.py'](https://github.com/BoevaLab/UniversalEPI/blob/main/Stage2/merge_dataset.py), the data paths can be specified in [`./Stage2/configs/configs.yaml`](https://github.com/BoevaLab/UniversalEPI/blob/main/Stage2/configs/configs.yaml).
+  - If npz files are already generated using [`create_dataset.py`](https://github.com/BoevaLab/UniversalEPI/blob/main/Stage2/create_dataset.py) and [`merge_dataset.py`](https://github.com/BoevaLab/UniversalEPI/blob/main/Stage2/merge_dataset.py), the data paths can be specified in [`./Stage2/configs/configs.yaml`](https://github.com/BoevaLab/UniversalEPI/blob/main/Stage2/configs/configs.yaml).
 
 
 d. Test Stage2
-  - Ensuring the genomic data (./data/stage1_outputs/predict_{cell_line_test}) and test_dir path (if exist) in [`./Stage2/configs/configs.yaml`](https://github.com/BoevaLab/UniversalEPI/blob/main/Stage2/configs/configs.yaml) are correct, run
+  - Ensuring the genomic data (`./data/stage1_outputs/predict_{cell_line_test}`) and test_dir path (if exist) in [`./Stage2/configs/configs.yaml`](https://github.com/BoevaLab/UniversalEPI/blob/main/Stage2/configs/configs.yaml) are correct, run
     ```
     python ./Stage2/main.py --config_dir ./Stage2/configs/configs.yaml --mode test
     ```
