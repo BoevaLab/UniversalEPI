@@ -120,7 +120,7 @@ def prepare_input(chrom_num, chrom_data_dict, atac_seq, dnase, map_seq):
 
 def make_input_target_from_list(chrom_list, chrom_data_dict, atac_seq, dnase, map_seq, flank):
     X, meta, Y, X_dnase, X_map = prepare_input(chrom_list[0], chrom_data_dict, atac_seq, dnase, map_seq)
-    indexing = np.arange(0, np.shape(Y)[0]) + flank
+    indexing = np.arange(0, np.shape(X)[0]-(2*flank)) + flank
 
     for train_chr in chrom_list[1:]:
 
@@ -128,7 +128,7 @@ def make_input_target_from_list(chrom_list, chrom_data_dict, atac_seq, dnase, ma
             train_chr, chrom_data_dict, atac_seq, dnase, map_seq
         )
 
-        indexing_chr = np.arange(0, np.shape(Y_chr)[0]) + flank + np.shape(X)[0]
+        indexing_chr = np.arange(0, np.shape(X_chr)[0]-(2*flank)) + flank + np.shape(X)[0]
         indexing = np.concatenate((indexing, indexing_chr), axis=0)
 
         X = np.concatenate((X, X_chr), axis=0)

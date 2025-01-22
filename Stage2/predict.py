@@ -8,10 +8,10 @@ import argparse
 
 import numpy as np
 import torch
+from create_dataset import generate as generate_datasets
 from dataset import NPZDatasetRaw
 from deepc.trepii_model import DeepC
 from models.transformer_encoder_model import Transformer_Encoder
-from scipy.stats import kendalltau, spearmanr
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 from utilities import getConfig
@@ -71,7 +71,7 @@ def predict(opt, cell_line, chroms):
     atac_path = os.path.join(opt.atac_path, f"predict_{cell_line}")
     dataset_test = NPZDatasetRaw(
         data=generate_datasets(
-            atac_path=atac_path, hic_path=None, save_dir=None, mode="test", seq_len=opt.seq_len, chroms=chroms
+            atac_path=atac_path, hic_path=None, save_dir=None, mode="test", seq_len=opt.seq_len, chrs=chroms
         )
     )
 
