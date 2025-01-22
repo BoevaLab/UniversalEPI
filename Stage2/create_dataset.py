@@ -2,7 +2,6 @@ import argparse
 import gc
 import os
 import pickle as pkl
-import warnings
 
 import numpy as np
 import pandas as pd
@@ -64,8 +63,7 @@ def add_data_to_dict(chrom_num, chrom_data_dict, target_data_path, cell_line):
     Create a mapping between chromosome number and its ground-truth matrix.
     """
 
-    target_path = os.path.join(target_data_path, cell_line, f"chr{chrom_num}_target.pkl")
-
+    target_path = os.path.join(target_data_path, cell_line, 'target_data', f"chr{chrom_num}_target.pkl")
     try:
         with open(target_path, "rb") as f:
             target_data = pkl.load(f)

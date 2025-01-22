@@ -121,12 +121,12 @@ def add_neg_samples(atac_bed_path, chroms, negative_sampling_rate=0.1):
 
 def save_target_data(full_atac_seq, hic_data_dir, bin_size, len_bins, chroms):
     for chr_n in chroms:
-        hic = pd.read_csv(os.path.join(hic_data_dir, f"chr{chr_n}_robust_norm.bed"), sep='\t', names=['bin1', 'bin2', 'score'])
-
+        hic = pd.read_csv(os.path.join(hic_data_dir, f"chr{chr_n}_robust_norm.bed"))
+        hic['bin1'] = hic['bin1']*bin_size
+        hic['bin2'] = hic['bin2']*bin_size
         atac_seq = full_atac_seq[full_atac_seq["chrom"] == "chr{}".format(chr_n)]
         atac_seq.loc[:, "hic_start"] = (np.floor((atac_seq["start"] + atac_seq["peak"]) / bin_size) * bin_size).astype(int)
         atac_seq = atac_seq.sort_values(by=["hic_start"], ascending = True)
-        
         peak_dict_list = []
         
         first_row = True
