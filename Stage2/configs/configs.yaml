@@ -5,12 +5,25 @@
   run_name: paper-hg38-map-concat-stage1024-rf-lrelu-eval-stg-newsplit-newdata-atac-var-beta-neg-s1337 
                                                             # name of the run
 
-# data paths
-  train_dir: data/processed_data/train_dataset.npz          # training data
-  val_dir: data/processed_data/val_dataset.npz              # validation data for evaluation
-  test_dir: data/processed_data/hepg2_input.npz             # test data for evaluation
+# data generation or paths if exist for training/testing
+  hic_res: 5000                                             # hic resolution [bp]
+  hic_path: data/hic/                                       # hic data path
+  atac_path: data/stage1_outputs/                           # DNA and ATAC path
+  cell_lines_train: ["gm12878", "k562"]                     # training cell lines
+  cell_lines_val: ["gm12878", "k562"]                       # validation cell lines
+  cell_lines_test: hepg2                                    # test cell lines
+  chroms: null                                              # if null, default chromosomes split is used
+                                                            # here one can specify chromosomes for test, e.g. chroms: [2, 6, 19]
+
+  data_save_dir: null                                       # if not null, path where data will be saved and it creates
+                                                            # {cell_line}_{train/test/val}.npz and {train/val}_dataset.py
+                                                            # if multiple cell lines are used for training and validation
+
+  train_dir: null                                           # training data path if exists, e.g. data/processed_data/train_dataset.npz
+  val_dir: null                                             # validation data path if exists
+  test_dir: null                                            # test data path if exists, e.g. data/processed_data/hepg2_input.npz
   logs_dir: checkpoints/stage2_models_gm12878_k562_all      # directory where model checkpoints will be saved
-  stage_1_model: checkpoints/stage1_gm12878_k562_model.pth  # path to stage-1 model
+  stage_1_model: checkpoints/stage1_model_gm12878_k562.pth  # path to stage-1 model
 
 # stage-1 model parameters:
   ksizes: [11, 11, 11, 5, 5]                                # CNN layer kernel sizes

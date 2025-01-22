@@ -8,6 +8,7 @@ import argparse
 
 import numpy as np
 import torch
+from create_dataset import generate as generate_datasets
 from dataset import NPZDatasetRaw
 from deepc.trepii_model import DeepC
 from models.transformer_encoder_model import Transformer_Encoder
@@ -68,7 +69,14 @@ def eval(opt, cell_line):
         model.to(device)
         featNet.to(device)
 
-    dataset_test = NPZDatasetRaw(opt.test_dir)
+    if opt.test_dir is None:
+        atac_path = os.path.join(opt.atac_path, f"predict_{cell_line}")
+        mode = "test"
+        dataset_test = NPZDatasetRaw(
+            data=generate_datasets(atac_path, opt.hic_path, opt.data_save_dir, mode, opt.seq_len, opt.chroms)
+        )
+    else:
+        dataset_test = NPZDatasetRaw(data_dir=opt.test_dir)
 
     dataloader_test = DataLoader(
         dataset_test, shuffle=False, batch_size=1, drop_last=False, num_workers=opt.num_workers

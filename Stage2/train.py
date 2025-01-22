@@ -10,8 +10,10 @@ import random
 import numpy as np
 import torch
 import torch.nn as nn
+from create_dataset import generate as generate_datasets
 from dataset import NPZDatasetRaw
 from deepc.trepii_model import DeepC
+from merge_dataset import merge_datasets
 from models.transformer_encoder_model import Transformer_Encoder
 from scipy.stats import kendalltau, spearmanr
 from torch.utils.data import DataLoader
@@ -81,8 +83,36 @@ def train(opt):
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=1, gamma=0.99)
 
     # -----------------------Loading Datasets----------------------------------
-    dataset_train = NPZDatasetRaw(opt.train_dir)
-    dataset_val = NPZDatasetRaw(opt.val_dir)
+    if opt.train_dir is None:
+        data_dict = {}
+        mode = "train"
+        for cell_line in opt.cell_lines_train:
+            atac_path_cell = os.path.join(opt.atac_path, f"predict_{cell_line}")
+            data_dict[f"{cell_line}_{mode}"] = generate_datasets(
+                atac_path_cell, opt.hic_path, opt.data_save_dir, mode, opt.seq_len, opt.chroms
+            )
+        data_merged = merge_datasets(
+            opt.cell_lines_train, mode, opt.hic_res, data_dict=data_dict, save_dir=opt.data_save_dir
+        )
+        dataset_train = NPZDatasetRaw(data=data_merged)
+    else:
+        dataset_train = NPZDatasetRaw(data_dir=opt.train_dir)
+
+    if opt.val_dir is None:
+        data_dict = {}
+        mode = "val"
+        for cell_line in opt.cell_lines_val:
+            atac_path_cell = os.path.join(opt.atac_path, f"predict_{cell_line}")
+            data_dict[f"{cell_line}_{mode}"] = generate_datasets(
+                atac_path_cell, opt.hic_path, opt.data_save_dir, mode, opt.seq_len, opt.chroms
+            )
+        data_merged = merge_datasets(
+            opt.cell_lines_val, mode, opt.hic_res, data_dict=data_dict, save_dir=opt.data_save_dir
+        )
+        dataset_val = NPZDatasetRaw(data=data_merged)
+    else:
+        dataset_val = NPZDatasetRaw(data_dir=opt.val_dir)
+
     batch_size = opt.batch_size
 
     print("Loading train data")
@@ -96,6 +126,7 @@ def train(opt):
 
     len_dataset = len(dataset_train)
     print("Length of dataset: ", len_dataset)
+    print("Length of val dataset: ", len(dataset_val))
 
     # create tool for counting iterations
     visualizer = Visualizer(opt)

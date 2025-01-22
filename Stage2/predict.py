@@ -8,18 +8,18 @@ import argparse
 
 import numpy as np
 import torch
+from create_dataset import generate as generate_datasets
 from dataset import NPZDatasetRaw
 from deepc.trepii_model import DeepC
 from models.transformer_encoder_model import Transformer_Encoder
-from scipy.stats import kendalltau, spearmanr
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 from utilities import getConfig
 
 
-# python predict.py --config_dir configs/configs.yaml
+# python predict.py --config_dir configs/configs.yaml --cell_line_predict imr90
 # ----------------------------------------------------------------------------
-def predict(opt, cell_line):
+def predict(opt, cell_line, chroms):
 
     if torch.cuda.is_available():
         use_gpu = True
@@ -68,7 +68,12 @@ def predict(opt, cell_line):
         model.to(device)
         featNet.to(device)
 
-    dataset_test = NPZDatasetRaw(opt.test_dir)
+    atac_path = os.path.join(opt.atac_path, f"predict_{cell_line}")
+    dataset_test = NPZDatasetRaw(
+        data=generate_datasets(
+            atac_path=atac_path, hic_path=None, save_dir=None, mode="test", seq_len=opt.seq_len, chrs=chroms
+        )
+    )
 
     dataloader_test = DataLoader(
         dataset_test, shuffle=False, batch_size=1, drop_last=False, num_workers=opt.num_workers
@@ -87,7 +92,6 @@ def predict(opt, cell_line):
     chr = []
     pos1 = []
     pos2 = []
-
 
     with torch.no_grad():
         for [dnase_i_val, seq_i_val, _, meta_i_val, map_i_val, _] in tqdm(dataloader_test):
@@ -145,9 +149,10 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Inference")
     parser.add_argument("--config_dir", type=str, help="Root directory for training configs.", required=True)
+    parser.add_argument("--cell_line_predict", type=str, help="Prediction cell line", required=True)
+    parser.add_argument("--chroms_predict", nargs="+", type=int, help="Prediction chromosomes", default=None)
 
     args = parser.parse_args()
     config = getConfig(args.config_dir)
-    cell_line = (config.test_dir.split("/")[-1]).split("_")[0]
 
-    predict(config, cell_line)
+    predict(config, args.cell_line_predict, args.chroms_predict)
