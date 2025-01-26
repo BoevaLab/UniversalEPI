@@ -2,7 +2,7 @@ cell_line:
   fit: [Gm12878, K562]
   validate: [Gm12878, K562]
   test: [A549]
-  predict: [Hepg2]   # [Reed0, Reed1440, Gm12878, K562, Imr90, Hepg2]
+  predict: [Imr90]   # [Reed0, Reed1440, Gm12878, K562, Imr90, Hepg2]
 
 
 chromosome:

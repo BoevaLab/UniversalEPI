@@ -7,7 +7,6 @@ options(scipen=999)
 ## Load count matrix, removing all columns that we are not interested in:
 raw.counts <- read.table("scores.tab", header=TRUE)
 raw.counts <- raw.counts[,4:ncol(raw.counts)]
-print(head(raw.counts))
 
 ## effective normalization factors are the product 
 ## of TMM factor and library size for each sample:
