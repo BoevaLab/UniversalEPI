@@ -1,40 +1,16 @@
 ## ATAC-seq Data Processing
 
-### Step 0 (optional): Generating signal p-value bigwig and peak files from BAM
-This step requires the following additional tools/packages:
-- bedClip (Download from [UCSC's utilities](https://hgdownload.soe.ucsc.edu/downloads.html#utilities_downloads))
-- bedGraphToBigWig (Download from [UCSC's utilities](https://hgdownload.soe.ucsc.edu/downloads.html#utilities_downloads))
-- [samtools](https://www.htslib.org/download/)
-- [macs2](https://pypi.org/project/MACS2/)
-- [bedtools](https://bedtools.readthedocs.io/en/latest/content/installation.html)
+### Cross-cell-type normalization
+Ensure that GM12878 ATAC-seq bigwig, which will be used as the reference, is present in `../../data/atac/raw`.
 
-Once these are installed successfully, run the following command (as an example)
-```
-python bam_to_bw.py -f ../data/atac/raw/IMR90_atac.bam -o ../data/atac/raw/IMR90 --bedclip_path ./bedClip --bedgraph2bw_path ./bedGraphToBigWig --chrom_sizes ../data/genome/hg38.ucsc.sizes
-```
-This will create `../data/atac/raw/IMR90.pval.signal.bigwig` and `../data/atac/raw/IMR90.peaks.narrowpeak`. 
-
-<br/>
-
-### Step 1: Cross-cell-type normalization of ATAC bigwig
-Once this is done, proceed with the following steps
-1. Ensure that GM12878 ATAC-seq bigwig, which will be used as reference, is present in `../../data/atac/raw`
-2. Get scaling factors for each bigwig
+- If you have bam files as input
    ```
-   ./normalize_atac.sh ../../data/atac/raw/*.bigwig
+   python normalize_atac.py -p ../../data/atac/raw/ --input_bam ../../data/atac/raw/IMR90.bam ../../data/atac/raw/HepG2.bam 
    ```
-   This will generate `normFactor.txt` which will contain a mapping between the bigwig files and their scaling factors.
-3. Scale each bigwig file using the obtained scaling factor
+- If you have bigwig and peak files as input
    ```
-   python ./scale_bigwig.py -i ../../data/atac/raw/IMR90.pval.signal.bigwig -o ../../data/atac/raw/IMR90_normalized.bw -s <scaling factor>
+   python normalize_atac.py -p ../../data/atac/raw/ --input_bw ../../data/atac/raw/IMR90.bigWig ../../data/atac/raw/HepG2.bigWig --input_bed ../../data/atac/raw/IMR90.bed ../../data/atac/raw/HepG2.bed
    ```
-   This will output the normalized bigwig file `../../data/atac/raw/IMR90_normalized.bw`.
 
-<br/>
 
-### Step 2: Deduplicate ATAC peaks
-Remove ATAC-seq peaks that are within 500bp of each other and keep the peak with maximum intensity. We assume that the peak is of [ENCODE narrowPeak format](https://genome.ucsc.edu/FAQ/FAQformat.html#format12).
-```
-python dedup_bed.py -f ../../data/atac/raw/IMR90.peaks.narrowpeak
-```
-This will create the deduplicated bed file `../../data/atac/raw/IMR90_dedup.bed`
+This will create the normalized bigwig files `../data/atac/raw/IMR90_normalized.bw`, `../data/atac/raw/HepG2_normalized.bw` and deduplicated peak files `../data/atac/raw/IMR90_dedup.bed`, `../data/atac/raw/HepG2_dedup.bed`.
