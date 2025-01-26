@@ -17,7 +17,7 @@ UniversalEPI is an attention-based deep ensemble designed to predict enhancer-pr
   conda env create -f environment.yml
   ```
   This will create an environment named "universalepi".
-- Download the [data directory](https://polybox.ethz.ch/index.php/s/YbNWDlOy2waE70V), unzip it, and place it in the root directory such that you have `./data`.
+- Download the [data directory](https://polybox.ethz.ch/index.php/s/knuCBXHbc9fGTyR), unzip it, and place it in the root directory such that you have `./data`.
 - Download the [model checkpoints](https://doi.org/10.5281/zenodo.14622040) and place each of them in the `./checkpoints` directory. Unzip each checkpoint. 
 
 <br/> 
@@ -44,12 +44,14 @@ b. Target data processing (only needed for [training and testing](https://github
 
 ## Step 2: Extract Genomic Features from Stage 1
 
-1. Create a new config file for your cell line or condition in [`./Stage1/`](https://github.com/BoevaLab/UniversalEPI/tree/main/Stage1). See [`./Stage1/`](https://github.com/BoevaLab/UniversalEPI/tree/main/Stage1) for more details on this.
+1. Create a new config file for your cell line or condition in [`./Stage1/`](https://github.com/BoevaLab/UniversalEPI/tree/main/Stage1). See [`./Stage1/`](https://github.com/BoevaLab/UniversalEPI/tree/main/Stage1) for more details.
 2. Store the genomic inputs
    ```
    python ./Stage1/store_inputs.py --cell_line imr90
    ```
    This will store parquet files containing DNA-sequence, ATAC-seq, and mappability data at `./data/stage1_outputs/predict_imr90/`. By default, all chromosomes will be used. To use a subset of chromosomes, mention the chromosomes under "chromosome: predict:" in [`./Stage1/configs/datamodule/validation/cross_cell.yaml`](https://github.com/BoevaLab/UniversalEPI/blob/main/Stage1/configs/datamodule/validation/cross-cell.yaml).
+
+Preprocessed data for the HepG2 cell line can downloaded [here](https://polybox.ethz.ch/index.php/s/h98bgYpFbVquZrK).
 
 <br/>
 
@@ -59,7 +61,7 @@ b. Target data processing (only needed for [training and testing](https://github
    ```
    python ./Stage2/predict.py --config_dir ./Stage2/configs/configs.yaml --cell_line_predict imr90
    ```
-   To select a subset of chromsomes for prediction, use
+   To select a subset of chromosomes for prediction, use
    ```
    python ./Stage2/predict.py --config_dir ./Stage2/configs/configs.yaml --cell_line_predict imr90 --chroms_predict 2 6 19
    ```
