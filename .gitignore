@@ -6,9 +6,11 @@ __pycache__/
 # C extensions
 *.so
 
-# Blacklist files
-basenji_blacklist.bed
-basenji_unmappable.bed
+# Large data directories
+data/
+checkpoints/
+outputs/
+results/
 
 # Distribution / packaging
 .Python
