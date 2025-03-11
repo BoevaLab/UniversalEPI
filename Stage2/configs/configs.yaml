@@ -22,7 +22,7 @@
   train_dir: null                                           # training data path if exists, e.g. data/processed_data/train_dataset.npz
   val_dir: null                                             # validation data path if exists
   test_dir: null                                            # test data path if exists, e.g. data/processed_data/hepg2_input.npz
-  logs_dir: checkpoints/stage2_models_gm12878_k562_all      # directory where model checkpoints will be saved
+  logs_dir: checkpoints                                     # directory where model checkpoints will be saved
   stage_1_model: checkpoints/stage1_model_gm12878_k562.pth  # path to stage-1 model
 
 # stage-1 model parameters:
