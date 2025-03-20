@@ -13,4 +13,4 @@ Ensure that GM12878 ATAC-seq bigwig, which will be used as the reference, is pre
    ```
 
 
-This will create the normalized bigwig files `../data/atac/raw/IMR90_normalized.bw`, `../data/atac/raw/HepG2_normalized.bw` and deduplicated peak files `../data/atac/raw/IMR90_dedup.bed`, `../data/atac/raw/HepG2_dedup.bed`.
+This will create the normalized bigwig files `../../data/atac/raw/IMR90_normalized.bw`, `../../data/atac/raw/HepG2_normalized.bw` and deduplicated peak files `../../data/atac/raw/IMR90_dedup.bed`, `../../data/atac/raw/HepG2_dedup.bed`.
