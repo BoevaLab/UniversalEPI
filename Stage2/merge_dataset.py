@@ -46,7 +46,7 @@ def merge_datasets(cell_lines, phase, res, data_dir=None, data_dict=None, save_d
 
     target_list, dnase_list, seq_list, meta_list, idx_list, map_list, blacklist_list = [], [], [], [], [], [], []
     for cell_line in cell_lines:
-        blacklist_path = os.path.path(os.getcwd(), "data", "blacklist", f"{cell_line}_blacklist.bed")
+        blacklist_path = os.path.join(os.getcwd(), "data", "blacklist", f"{cell_line}_blacklist.bed")
         if os.path.exists(blacklist_path):
             blacklist = pd.read_csv(blacklist_path, sep="\t", names=["chr", "start", "end"])
         else:

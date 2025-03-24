@@ -107,7 +107,7 @@ def main():
     
     # Remove GM12878 bigwig file
     for bw in bigwig_files:
-        if 'GM12878.bigwig' in bw:
+        if 'GM12878.bigWig' in bw:
             bigwig_files.remove(bw)
             break
     

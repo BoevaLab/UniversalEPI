@@ -56,6 +56,8 @@ def get_percentiles(cell, data_dir, chrom=range(1,23), bin_size=5000, len_bins=4
                 out_dfs.append(out_df)
                 if save:
                     hic = hic_kr[(hic_kr.dist == (i*bin_size))]
+                    hic['bin1'] = hic['bin1']//bin_size
+                    hic['bin2'] = hic['bin2']//bin_size
                     df_meta = hic.loc[:,['bin1', 'bin2']]
                     df_meta['score'] = score
                     save_df = df_meta

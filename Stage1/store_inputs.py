@@ -57,7 +57,7 @@ def store_input_data(cell_line: str):
     output_dir = os.path.join(
         hydra.utils.get_original_cwd(), f"data/stage1_outputs/predict_{cell_line.lower()}"
     )
-    os.makedirs(output_dir)
+    os.makedirs(output_dir, exist_ok=True)
 
     log.info("Init dask task graph")
     ddf = dd.from_pandas(targets, chunksize=2**12)
