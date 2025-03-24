@@ -17,7 +17,7 @@ UniversalEPI is an attention-based deep ensemble designed to predict enhancer-pr
   conda env create -f environment.yml
   ```
   This will create an environment named "universalepi".
-- Download the [data directory](https://polybox.ethz.ch/index.php/s/knuCBXHbc9fGTyR), unzip it, and place it in the root directory such that you have `./data`.
+- Download the [data directory](https://zenodo.org/records/15079298), unzip it, and place it in the root directory such that you have `./data`.
 - Download the [model checkpoints](https://doi.org/10.5281/zenodo.14622040) and place each of them in the `./checkpoints` directory. Unzip each checkpoint. 
 
 <br/> 
