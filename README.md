@@ -2,18 +2,20 @@
 **UniversalEPI: Harnessing Attention Mechanisms to Decode Chromatin Interactions in Rare and Unexplored Cell Types**
 
 [![Preprint](https://img.shields.io/badge/preprint-available-green)](https://doi.org/10.1101/2024.11.22.624813) &nbsp;
-[![DOI](https://zenodo.org/badge/649742908.svg)](https://doi.org/10.5281/zenodo.14622040)
+[![DOI](https://zenodo.org/badge/649742908.svg)](https://doi.org/10.5281/zenodo.14622040) &nbsp;
+[![Wiki](https://img.shields.io/badge/Wiki-Documentation-yellow)](https://github.com/BoevaLab/UniversalEPI/wiki)
+
 
 UniversalEPI is an attention-based deep ensemble designed to predict enhancer-promoter interactions up to 2 Mb, which can generalize across unseen cell types using only DNA sequence and chromatin accessibility (ATAC-seq) data as input. 
 
-![UniversalEPI architecture](https://github.com/user-attachments/assets/9b590a1e-aa3a-45a3-ba4b-bdecd3128f0b)
+![UniversalEPI architecture](https://private-user-images.githubusercontent.com/33765932/429136592-8a9bdb2c-5bd8-4b60-9a06-b763696270f5.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDM2Njc1MDAsIm5iZiI6MTc0MzY2NzIwMCwicGF0aCI6Ii8zMzc2NTkzMi80MjkxMzY1OTItOGE5YmRiMmMtNWJkOC00YjYwLTlhMDYtYjc2MzY5NjI3MGY1LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA0MDMlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNDAzVDA4MDAwMFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTE1ZDk4NWJmYjBmY2RjMjcyNTk0YTk4MWM3YWU4MWNjM2U4N2Y3NTlhNTU4NTkyMDBiMTY0M2JmYjc2OTI5MTMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.Sih8gGDlGkdYeBDyH7AaZnkL2O32WByAC4LWEYxALJI)
 
 <br/>
 
 ## Requirements
 
 - You can install the necessary packages by creating a conda environment using the provided .yml file:
-  ```
+  ```bash
   conda env create -f environment.yml
   ```
   This will create an environment named "universalepi".
@@ -30,12 +32,12 @@ a. Input data processing
 b. Target data processing (only needed for [training and testing](https://github.com/BoevaLab/UniversalEPI?tab=readme-ov-file#universalepi-training-and-testing))
   - [`preprocessing/hic`](https://github.com/BoevaLab/UniversalEPI/tree/main/preprocessing/hic) contains the details for processing Hi-C data from your raw input (.hic or .cool) or processed files (pairwise interaction files). This includes Hi-C normalization.
   - Combine ATAC-seq and Hi-C to extract targets corresponding to ATAC peaks for each training cell line
-    ```
+    ```python
     python ./preprocessing/prepare_target_data.py --cell_line gm12878 --atac_bed_path ./data/atac/raw/GM12878_dedup.bed --hic_data_dir ./data/hic/
     ```
     This also saves the updated ATAC-seq peaks at `./data/atac/raw/GM12878_dedup_neg.bed` with 10% pseudopeaks added
   - Combine ATAC-seq and Hi-C to extract targets corresponding to ATAC peaks for each test cell line
-    ```
+    ```python
     python ./preprocessing/prepare_target_data.py --cell_line hepg2 --atac_bed_path ./data/atac/raw/HEPG2_dedup.bed --hic_data_dir ./data/hic/ --test
     ```
     The above script will run for all autosomes (chr1-22) by default. The Hi-C resolution is assumed to be 5Kb. The Hg38 genome version is considered by default. These can be modified using appropriate flags.
@@ -46,23 +48,23 @@ b. Target data processing (only needed for [training and testing](https://github
 
 1. Create a new config file for your cell line or condition in [`./Stage1/`](https://github.com/BoevaLab/UniversalEPI/tree/main/Stage1). See [`./Stage1/`](https://github.com/BoevaLab/UniversalEPI/tree/main/Stage1) for more details.
 2. Store the genomic inputs
-   ```
+   ```python
    python ./Stage1/store_inputs.py --cell_line imr90
    ```
    This will store parquet files containing DNA-sequence, ATAC-seq, and mappability data at `./data/stage1_outputs/predict_imr90/`. By default, all chromosomes will be used. To use a subset of chromosomes, mention the chromosomes under "chromosome: predict:" in [`./Stage1/configs/datamodule/validation/cross_cell.yaml`](https://github.com/BoevaLab/UniversalEPI/blob/main/Stage1/configs/datamodule/validation/cross-cell.yaml).
 
-Preprocessed data for the HepG2 cell line can downloaded [here](https://polybox.ethz.ch/index.php/s/h98bgYpFbVquZrK).
+Preprocessed data for the HepG2 cell line can be downloaded [here](https://polybox.ethz.ch/index.php/s/h98bgYpFbVquZrK).
 
 <br/>
 
 ## Step 3: Generate Hi-C Predictions from Stage 2
 
 1. Ensure that the atac_path (`data/stage1_outputs/`) in [`./Stage2/configs/configs.yaml`](https://github.com/BoevaLab/UniversalEPI/blob/main/Stage2/configs/configs.yaml) is correctly set. Then run
-   ```
+   ```python
    python ./Stage2/predict.py --config_dir ./Stage2/configs/configs.yaml --cell_line_predict imr90
    ```
    To select a subset of chromosomes for prediction, use
-   ```
+   ```python
    python ./Stage2/predict.py --config_dir ./Stage2/configs/configs.yaml --cell_line_predict imr90 --chroms_predict 2 6 19
    ```
    This generates `./results/imr90/paper-hg38-map-concat-stage1024-rf-lrelu-eval-stg-newsplit-newdata-atac-var-beta-neg-s1337/results.npz` which stores the following information:
@@ -78,18 +80,18 @@ Preprocessed data for the HepG2 cell line can downloaded [here](https://polybox.
 ## UniversalEPI Training and Testing
 
 a. Train Stage1. It uses training cell lines defined in [`./Stage1/configs/datamodule/validation/cross_cell.yaml`](https://github.com/BoevaLab/UniversalEPI/blob/main/Stage1/configs/datamodule/validation/cross-cell.yaml).
-  ```
+  ```python
   python ./Stage1/train.py
   ```
 
 b. Test Stage1. It uses test cell lines defined in [`./Stage1/configs/datamodule/validation/cross_cell.yaml`](https://github.com/BoevaLab/UniversalEPI/blob/main/Stage1/configs/datamodule/validation/cross-cell.yaml).
-  ```
+  ```python
   python ./Stage1/test.py
   ```
   
 c. Train Stage2
   - Ensure that genomic data (`./data/stage1_outputs/predict_{cell_line}`) and HiC paths (`./data/hic/`) in [`./Stage2/configs/configs.yaml`](https://github.com/BoevaLab/UniversalEPI/blob/main/Stage2/configs/configs.yaml) are correct. Then run
-    ```
+    ```python
     python ./Stage2/main.py --config_dir ./Stage2/configs/configs.yaml --mode train
     ```
   - If npz files are already generated using [`create_dataset.py`](https://github.com/BoevaLab/UniversalEPI/blob/main/Stage2/create_dataset.py) and [`merge_dataset.py`](https://github.com/BoevaLab/UniversalEPI/blob/main/Stage2/merge_dataset.py), the data paths can be specified in [`./Stage2/configs/configs.yaml`](https://github.com/BoevaLab/UniversalEPI/blob/main/Stage2/configs/configs.yaml).
@@ -97,7 +99,7 @@ c. Train Stage2
 
 d. Test Stage2
   - Ensuring the genomic data (`./data/stage1_outputs/predict_{cell_line_test}`) and test_dir path (if exist) in [`./Stage2/configs/configs.yaml`](https://github.com/BoevaLab/UniversalEPI/blob/main/Stage2/configs/configs.yaml) are correct, run
-    ```
+    ```python
     python ./Stage2/main.py --config_dir ./Stage2/configs/configs.yaml --mode test
     ```
     This generates `./results/hepg2/paper-hg38-map-concat-stage1024-rf-lrelu-eval-stg-newsplit-newdata-atac-var-beta-neg-s1337/results.npz` which stores the following information:
