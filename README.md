@@ -8,7 +8,7 @@
 
 UniversalEPI is an attention-based deep ensemble designed to predict enhancer-promoter interactions up to 2 Mb, which can generalize across unseen cell types using only DNA sequence and chromatin accessibility (ATAC-seq) data as input. 
 
-![UniversalEPI architecture](https://private-user-images.githubusercontent.com/33765932/429136592-8a9bdb2c-5bd8-4b60-9a06-b763696270f5.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDM2Njc1MDAsIm5iZiI6MTc0MzY2NzIwMCwicGF0aCI6Ii8zMzc2NTkzMi80MjkxMzY1OTItOGE5YmRiMmMtNWJkOC00YjYwLTlhMDYtYjc2MzY5NjI3MGY1LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA0MDMlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNDAzVDA4MDAwMFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTE1ZDk4NWJmYjBmY2RjMjcyNTk0YTk4MWM3YWU4MWNjM2U4N2Y3NTlhNTU4NTkyMDBiMTY0M2JmYjc2OTI5MTMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.Sih8gGDlGkdYeBDyH7AaZnkL2O32WByAC4LWEYxALJI)
+![UniversalEPI architecture](https://github.com/user-attachments/assets/28d37e3e-9e42-4df9-b726-1835f4200687)
 
 <br/>
 
@@ -110,3 +110,20 @@ d. Test Stage2
      - variance (aleatoric uncertainty associated with the prediction)
      - targets (log Hi-C)
   - `./Stage2/plot_scores.ipynb` can then be used to generate evaluation plots.
+
+
+## Citing UniversalEPI
+
+If you use UniversalEPI in your work, you can cite it using
+```BibTex
+@article{grover2024universalepi,
+  title={UniversalEPI: harnessing attention mechanisms to decode chromatin interactions in rare and unexplored cell types},
+  author={Grover, Aayush and Zhang, Lin and Muser, Till and H{\"a}fliger, Simeon and Wang, Minjia and Yates, Josephine and Van Allen, Eliezer M and Theis, Fabian J and Ibarra, Ignacio L and Krymova, Ekaterina and Boeva, Valentina},
+  journal={bioRxiv},
+  doi={10.1101/2024.11.22.624813},
+  url={https://doi.org/10.1101/2024.11.22.624813},
+  pages={2024--11},
+  year={2024},
+  publisher={Cold Spring Harbor Laboratory}
+}
+```
