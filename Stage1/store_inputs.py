@@ -13,6 +13,7 @@ import numpy as np
 import dask
 import dask.dataframe as dd
 import pandas as pd
+import pickle as pkl
 
 from src.datamodules.encode_datamodule import MultiCellModule
 from src.datasets.encode_dataset import CellDataset
@@ -35,7 +36,10 @@ def store_input_data(cell_line: str):
     datamodule: MultiCellModule = hydra.utils.instantiate(
         config.datamodule, _recursive_=False
     )
-    datamodule.setup("fit")
+    with open('train_transforms.pkl', 'rb') as f:
+        transforms = pkl.load(f)
+    datamodule.set_transforms(transforms)
+    #datamodule.setup("fit")
     datamodule.setup("predict")
 
     predict_dataloader = datamodule.predict_dataloader()

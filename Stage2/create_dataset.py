@@ -33,7 +33,7 @@ def filter_sort_atac(atac_seq, chr_str):
     return atac_seq_chr
 
 
-def combine_input(path):
+def combine_input(path, chrs=None):
     COLUMNS = [
         "original_index",  # line number in the original atac file, 0-based
         "atacpeak",  # value of atacseq peak
@@ -44,16 +44,20 @@ def combine_input(path):
         "dnase",  # ATAC signal
         "mappability",  # mappability signal
     ]
-    df_chr1_path = os.path.join(path, "chr1.pq")
-    input_df = pd.read_parquet(df_chr1_path, columns=COLUMNS, engine="pyarrow").set_index("original_index")
-    input_df["chrom"] = "chr1"
-    for chr in chromosome_nums:
-        if chr == 1:
-            continue
+
+    chromosomes_to_use = chrs if chrs is not None else chromosome_nums
+
+    input_df = None
+
+    for chr in chromosomes_to_use:
         df_path = os.path.join(path, f"chr{chr}.pq")
         df = pd.read_parquet(df_path, columns=COLUMNS, engine="pyarrow").set_index("original_index")
         df["chrom"] = f"chr{chr}"
-        input_df = pd.concat([input_df, df], ignore_index=True)
+
+        if input_df is None:
+            input_df = df
+        else:
+            input_df = pd.concat([input_df, df], ignore_index=True)
     gc.collect()
     return input_df
 
@@ -181,7 +185,8 @@ def generate(atac_path, hic_path, save_dir, mode, seq_len=401, chrs=None):
 
     target_list, feat_list, dnase_list, map_list = [], [], [], []
 
-    atac_seq = combine_input(atac_path)
+    chroms = chromosome_nums if chrs is None else chrs
+    atac_seq = combine_input(atac_path, chroms)
     atac_seq_dnase = atac_seq.copy(deep=True)
     atac_seq_map = atac_seq.copy(deep=True)
 
